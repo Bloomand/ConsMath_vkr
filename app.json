@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "ConsMath",
+    "slug": "proCalcReact",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#485068"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bloomand.proCalcReact"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#485068"
+      },
+      "package": "com.bloomand.proCalcReact"
+    },
+    "web": {
+      "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1f249390-4afc-49da-9415-fbbce6bc4172"
+      }
+    }
+  }
+}
