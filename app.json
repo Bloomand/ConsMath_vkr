@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "ConsMath",
+    "newArchEnabled": true,
     "slug": "proCalcReact",
     "version": "1.0.0",
     "orientation": "portrait",

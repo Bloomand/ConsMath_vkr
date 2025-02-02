@@ -1,174 +1,134 @@
-import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Dimensions } from 'react-native';
 import { useState } from 'react';
 import Tooltip from 'react-native-walkthrough-tooltip';
+import auth from '@react-native-firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const { width } = Dimensions.get('window');
 
 const Main = ({ navigation }) => {
 
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
-  const [open4, setOpen4] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const logOut = async () => {
+    setLoading(true);
+    try {
+      await AsyncStorage.removeItem("user-id");
+      navigation.navigate("Login");
+    } catch (error) {
+      console.error("Ошибка при выходе:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <View style={styles.container} >
-      <TouchableOpacity style={styles.buttonMenu_1}
-        onPress={() => navigation.navigate('Precise')}>
-        <View style={styles.tooltip}></View>
-        <Text style={styles.text_1}>PRECISE MATH</Text>
-        <View style={styles.tooltip}>
-          <Tooltip
-            isVisible={open1}
-            content={<View>
-              <Text>Provide the 100% accurate answers for the basic arithmetic problems (simple enough to solve in your head).</Text>
-              <Text>During case interviews (for business consulting jobs) calculations with 100% accuracy are often required. Any single mistake means a failing grade. In the physical interview, the use of a calculator is prohibited, paper/pen can be acceptable for longer calculations, but for shorter and less complicated tasks to calculate in your head is highly recommended! That’s exactly what you can practice in this app.</Text>
-            </View>}
-            useInteractionManager={true}
-            onClose={() => setOpen1(false)}
-          />
-          <TouchableHighlight onPress={() => setOpen1(true)}>
-            <View style={styles.tool_v}><Text style={styles.tool_text_1}>i</Text></View>
-          </TouchableHighlight>
-        </View>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.logoutContainer}>
+        <TouchableOpacity style={styles.buttonLogOut} onPress={logOut}>
+          <Text style={styles.text_logOut}>LOG OUT</Text>
+        </TouchableOpacity>
+      </View>
 
-      <TouchableOpacity style={styles.buttonMenu_1}
-        onPress={() => navigation.navigate('Estimation')}>
-        <View style={styles.tooltip}></View>
-        <Text style={styles.text_1}>ESTIMATION MATH</Text>
-        <View style={styles.tooltip}>
-          <Tooltip
-            isVisible={open2}
-            content={<View>
-              <Text>Provide the approximate answer (+/-20% range of error is allowed) for more complex arithmetic problems.</Text>
-              <Text>Sometimes in case interviews (for business consulting jobs) it will be acceptable to give the approximate answer - in the range of +/-20% of the actual answer. For example, during market sizing tasks or estimation problems like "estimate the number of traffic lights in your city". As the assumptions are approximate, 100% accuracy of calculations is not required. And sometimes interviewers prefer when you don't interrupt the flow of conversation with the use of pen/paper. But don't forget to ask the permission from the interviewer if it is acceptable to give the approximate answer instead of precise one.</Text>
-            </View>}
-            useInteractionManager={true}
-            onClose={() => setOpen2(false)}
-          />
-          <TouchableHighlight onPress={() => setOpen2(true)}>
-            <View style={styles.tool_v}><Text style={styles.tool_text_1}>i</Text></View>
-          </TouchableHighlight>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.buttonMenu_1}
-        onPress={() => navigation.navigate('Context')}>
-        <View style={styles.tooltip}></View>
-        <Text style={styles.text_1}>MATH IN CONTEXT</Text>
-        <View style={styles.tooltip}>
+      <TouchableOpacity style={styles.buttonMenu} onPress={() => navigation.navigate('Precise')}>
+        <Text style={styles.text}>PRECISE MATH</Text>
         <Tooltip
-            isVisible={open3}
-            content={<View>
-              <Text>Provide the approximate answer (+/-20% range of error is allowed) for the arithmetic problems granted within business, financial and other contexts.</Text>
-              <Text>During interviews in business consulting companies (and also during aptitude tests in some of them) you have to quickly analyze quantitative and verbal information combined together in order to do necessary calculations. Practice yourself with that mode that imitates such environment.</Text>
-            </View>}
-            useInteractionManager={true}
-            onClose={() => setOpen3(false)}
-          />
-          <TouchableHighlight onPress={() => setOpen3(true)}>
-            <View style={styles.tool_v}><Text style={styles.tool_text_1}>i</Text></View>
-          </TouchableHighlight>
-        </View>
+          isVisible={open1}
+          content={<Text>Provide the 100% accurate answers for the basic arithmetic problems.</Text>}
+          onClose={() => setOpen1(false)}
+        />
+        <TouchableHighlight onPress={() => setOpen1(true)} style={styles.tooltipContainer}>
+          <Text style={styles.tooltipText}>i</Text>
+        </TouchableHighlight>
       </TouchableOpacity>
 
-      
+      <TouchableOpacity style={styles.buttonMenu} onPress={() => navigation.navigate('Estimation')}>
+        <Text style={styles.text}>ESTIMATION MATH</Text>
+        <Tooltip
+          isVisible={open2}
+          content={<Text>Provide an approximate answer (+/-20% range of error allowed).</Text>}
+          onClose={() => setOpen2(false)}
+        />
+        <TouchableHighlight onPress={() => setOpen2(true)} style={styles.tooltipContainer}>
+          <Text style={styles.tooltipText}>i</Text>
+        </TouchableHighlight>
+      </TouchableOpacity>
 
+      <TouchableOpacity style={styles.buttonMenu} onPress={() => navigation.navigate('Context')}>
+        <Text style={styles.text}>MATH IN CONTEXT</Text>
+        <Tooltip
+          isVisible={open3}
+          content={<Text>Provide the approximate answer within business and financial contexts.</Text>}
+          onClose={() => setOpen3(false)}
+        />
+        <TouchableHighlight onPress={() => setOpen3(true)} style={styles.tooltipContainer}>
+          <Text style={styles.tooltipText}>i</Text>
+        </TouchableHighlight>
+      </TouchableOpacity>
     </View>
-  )
-}
-
-{/* <TouchableOpacity style={styles.buttonMenu_2}
-        onPress={() => navigation.navigate('Context')}>
-        <View style={styles.tooltip}></View>
-        <Text style={styles.text_2}>RESTORE PURCHASE</Text>
-        <View style={styles.tooltip}>
-        <Tooltip
-            isVisible={open4}
-            content={<View>
-              <Text>ПЛОТИТЕ</Text>
-              <Text>НАЛОГИ</Text>
-            </View>}
-            useInteractionManager={true}
-            onClose={() => setOpen4(false)}
-          />
-          <TouchableHighlight onPress={() => setOpen4(true)}>
-            <View style={styles.tool_v}><Text style={styles.tool_text_2}>i</Text></View>
-          </TouchableHighlight>
-        </View>
-      </TouchableOpacity> */}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingLeft: 40,
-    paddingRight: 40,
+    alignItems: 'center',
+    paddingHorizontal: '5%',
   },
-  buttonMenu_1: {
+  buttonMenu: {
     flexDirection: 'row',
-    margin: 15,
-    borderRadius: 10,
+    alignItems: 'center',
     justifyContent: 'space-between',
+    width: '90%',
+    paddingVertical: 15,
+    marginVertical: 10,
+    borderRadius: 10,
     backgroundColor: '#223764',
     borderWidth: 2,
     borderColor: '#86bfe8',
+    position: 'relative',
   },
-  buttonMenu_2: {
-    flexDirection: 'row',
-    margin: 15,
-    borderRadius: 10,
-    justifyContent: 'space-between',
-    backgroundColor: '#86bfe8',
-    borderWidth: 2,
-    borderColor: '#223764',
-  },
-  text_1: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 18,
+  text: {
+    fontSize: width * 0.045,
     color: 'white',
-    textAlign: 'center'
-    //fontWeight: 'bold',
+    textAlign: 'center',
+    flex: 1,
   },
-  text_2: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 18,
-    textAlign: 'center'
-    //fontWeight: 'bold',
+  tooltipContainer: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
   },
-  tool: {
-    width: 300,
-    height: 300,
-    paddingRight: 50,
-    //justifyContent: 'center',
-    //backgroundColor: '#000',
-  },
-  tooltip: {
-    alignItems: 'flex-end',
-    width: 20,
-  },
-  tool_v: {
-    padding: 5,
-  },
-  tool_text_1: {
-    width: 20,
-    height: 20,
-    borderRadius: 20,
+  tooltipText: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     borderWidth: 2,
     textAlign: 'center',
     borderColor: 'white',
     color: 'white',
-    //justifyContent: 'flex-end',
   },
-  tool_text_2: {
-    width: 20,
-    height: 20,
-    borderRadius: 20,
+  logoutContainer: {
+    alignSelf: 'flex-end',
+    margin: 20,
+  },
+  buttonLogOut: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 10,
+    backgroundColor: 'white',
     borderWidth: 2,
+    borderColor: '#223764',
+  },
+  text_logOut: {
+    fontSize: width * 0.035,
+    color: '#223764',
     textAlign: 'center',
-    //justifyContent: 'flex-end',
-  }
+  },
 });
 
-export default Main
+export default Main;
