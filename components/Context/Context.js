@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -5,50 +6,31 @@ import {
   TouchableOpacity,
   Switch,
   Image,
-} from 'react-native'; 
-import { useState } from 'react';
+  Dimensions
+} from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+
+const Context = ({ navigation }) => {
+  const [isEndlessMode, setIsEndlessMode] = useState(false);
+  const toggleSwitch = () => setIsEndlessMode(prevState => !prevState);
 
 
-const Context = ({navigation}) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => {
-    setIsEnabled(previousState => !previousState);
-  };
-  
   return (
     <View style={styles.main}>
-      <View style={styles.element1}>
+      <View style={styles.element2}>
         <View>
-          <Image
-            style={styles.image}
-            source={require('../../src/graph.png')}
-          />
+          <Image style={styles.image} source={require('../../src/graph.png')} />
           <Text style={styles.image_text}>Ranked Game</Text>
           <Text style={styles.image_text}>(1 min)</Text>
         </View>
-        <Switch style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
-          trackColor={{ 1: '#223764', 0: '#223764' }}
-          thumbColor={isEnabled ? '#223764' : '#223764'}
-          ios_backgroundColor={'#223764'}
-          onValueChange={toggleSwitch}
-          value={isEnabled} />
+        <Switch style={styles.switch} trackColor={{ true: '#223764', false: '#223764' }} thumbColor={'#223764'} ios_backgroundColor={'#223764'} onValueChange={toggleSwitch} value={isEndlessMode} />
         <View>
-          <Image
-            style={styles.image}
-            source={require('../../src/infinite.png')}
-          />
+          <Image style={styles.image} source={require('../../src/infinite.png')} />
           <Text style={styles.image_text}>Endless Mode</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.start}
-        onPress={() => {
-          if (isEnabled) {
-            navigation.navigate('EndlessGameCont', { mode: isEnabled });
-          } else {
-            navigation.navigate('RankedGameCont', { mode: isEnabled });
-          }
-        }
-        }>
+      <TouchableOpacity style={styles.start} onPress={() => navigation.navigate(isEndlessMode ? 'EndlessGameCont' : 'RankedGameCont', { mode: isEndlessMode })}>
         <Text style={styles.text}>START GAME</Text>
       </TouchableOpacity>
     </View>
@@ -59,43 +41,74 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     justifyContent: 'space-around',
-    padding: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
+    padding: width * 0.05,
     backgroundColor: '#ccc'
   },
   element1: {
-    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: width * 0.02,
+    borderRadius: 10,
+    alignItems: 'center',
+    backgroundColor: '#fff'
+  },
+  centeredList: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 1
+  },
+  element2: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    //margin: 10,
-    padding: 10,
+    padding: width * 0.02,
     borderRadius: 10,
-    alignItems: 'baseline',
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    backgroundColor: '#fff'
+  },
+  item: {
+    width: width * 0.25,
+    height: width * 0.25,
+    margin: width * 0.005,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5
   },
   image: {
-    margin: 15,
-    width: 90,
-    height: 80,
+    margin: width * 0.03,
+    width: width * 0.22,
+    height: width * 0.2
   },
   image_text: {
-    width: 110,
-    fontSize: 17,
-    textAlign: 'center',
+    width: width * 0.3,
+    fontSize: width * 0.045,
+    textAlign: 'center'
+  },
+  element3: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: width * 0.02,
+    borderRadius: 10,
+    alignItems: 'center',
+    backgroundColor: '#fff'
   },
   start: {
     justifyContent: 'center',
-    //margin: 10,
-    padding: 30,
+    padding: height * 0.05,
+    marginTop: height * 0.5,
     borderRadius: 10,
     alignItems: 'center',
-    backgroundColor: '#223764',
+    backgroundColor: '#223764'
   },
-  text:{
-    fontSize: 18,
+  text: {
+    fontSize: width * 0.05,
     fontWeight: 'bold',
-    color:'white',
+    color: 'white'
+  },
+  title: {
+    fontSize: width * 0.05
+  },
+  switch: {
+    transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }]
   }
 });
 
