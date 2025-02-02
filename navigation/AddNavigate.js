@@ -11,16 +11,17 @@ import RankedGameEst from '../components/Estimation/RankedGameEst';
 import EndlessGameEst from '../components/Estimation/EndlessGameEst';
 import RankedGameCont from '../components/Context/RankedGameCont';
 import EndlessGameCont from '../components/Context/EndlessGameCont';
+import Login from '../components/Login';
+import Registr from '../components/Registr';
 
 const Stack = createNativeStackNavigator();
 
 const AddNavigate = () => (
     <NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen
-                name="Home"
-                component={Main}
-                options={{ title: ' ' }}
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Registration" component={Registr} />
+            <Stack.Screen name="Home" component={Main} options={{ title: ' ' }}
             />
             <Stack.Screen name="Precise" component={Precise} />
             <Stack.Screen name="Estimation" component={Estimation} />
