@@ -60,4 +60,3 @@ babel.config.js.cache
 
 # TypeScript
 *.tsbuildinfo
-node_modules
