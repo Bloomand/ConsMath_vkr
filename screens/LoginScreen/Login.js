@@ -18,25 +18,26 @@ const Login = ({ navigation }) => {
   const logIn = useCallback(async () => {
     try {
       const { data } = await login(email, password);
-      console.log("Login successful", data);
+      setError(false);
+      await AsyncStorage.setItem("user-id", data.localId);
       navigation.navigate("Home");
     } catch (error) {
-      console.error("Error message:", error.message);
+      console.log("Error", error.message);
+      setError(true);
     }
   }, [email, password]);
 
   const redirect = useCallback(async () => {
     const userId = await AsyncStorage.getItem("user-id");
-    console.log("Retrieved userId:", userId);
 
     if (!userId) return;
     navigation.navigate("Home");
   }, []);
 
-  
   useEffect(() => {
     redirect();
   }, [redirect, navigation]);
+
 
   return (
     <View style={styles.Reg}>
