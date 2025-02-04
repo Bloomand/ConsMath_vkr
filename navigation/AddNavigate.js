@@ -2,17 +2,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Main from '../components/Main';
-import Precise from '../components/Precise/Precise';
-import Estimation from '../components/Estimation/Estimation';
-import Context from '../components/Context/Context';
-import RankedGame from '../components/Precise/RankedGame';
+import Precise from '../screens/PreciseMenu/Precise';
+import Estimation from '../screens/EstimationMenu/Estimation';
+import Context from '../screens/MathInContextMenu/Context';
+import RankedGame from '../screens/PreciseRankedGame/RankedGame';
 import EndlessGame from '../components/Precise/EndlessGame';
-import RankedGameEst from '../components/Estimation/RankedGameEst';
-import EndlessGameEst from '../components/Estimation/EndlessGameEst';
+import RankedGameEst from '../screens/EstimationRankedGame/RankedGameEst';
+import EndlessGameEst from '../screens/EstimationEndlessGame/EndlessGameEst';
 import RankedGameCont from '../components/Context/RankedGameCont';
-import EndlessGameCont from '../components/Context/EndlessGameCont';
-import Login from '../components/Login';
-import Registr from '../components/Registr';
+import EndlessGameCont from '../screens/MathInContextEndlessGame/EndlessGameCont';
+import Registr from '../screens/Registration/Registr';
+import Login from '../screens/Login/Login';
+
 
 const Stack = createNativeStackNavigator();
 
