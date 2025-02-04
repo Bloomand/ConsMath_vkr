@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { useEffect, useState, useCallback } from 'react';
 import React from 'react';
-import Game from './Game.js';
+import Game from '../../components/Precise/Game.js';
 
 const RankedGame = ({ navigation, route }) => {
     const [timerCount, setTimer] = useState();
