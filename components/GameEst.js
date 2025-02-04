@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput } from 'rea
 
 
 
-const Game = (props, route) => {
+const GameEst = (props, route) => {
     const [curNum1, setCurNum1] = useState(14344);
 
     const [curArif, setCurArif] = useState("+");
@@ -282,4 +282,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Game
+export default GameEst;
