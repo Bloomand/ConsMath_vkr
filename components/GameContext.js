@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput } from 'react-native';
 
-import dataContext from '../src/DataContext.js'
+import dataContext from '../src/DataContext';
 
 
 const GameContext = (props, route) => {
@@ -347,4 +347,4 @@ const styles = StyleSheet.create({
 }
 );
 
-export default GameContext;
+export default GameContext
