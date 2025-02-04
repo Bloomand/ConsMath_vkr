@@ -1,14 +1,14 @@
+import { useState, useEffect, useCallback } from "react";
 import {
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
+  Button,
+  TouchableOpacity,
+  TextInput,
 } from "react-native";
-import { useCallback, useEffect, useState } from "react";
-
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { signup } from "../../src/firebaseApi/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Registr = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -40,6 +40,7 @@ const Registr = ({ navigation }) => {
   useEffect(() => {
     redirect();
   }, [redirect, navigation]);
+
 
   return (
     <View style={styles.Reg}>
