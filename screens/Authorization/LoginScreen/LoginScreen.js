@@ -82,6 +82,10 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
+<<<<<<< Updated upstream
+=======
+export default Login;
+>>>>>>> Stashed changes
 
 const styles = StyleSheet.create({
   Reg: {
@@ -122,5 +126,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+<<<<<<< Updated upstream
 
 export default LoginScreen;
+=======
+<<<<<<<< Updated upstream:screens/Login/Login.js
+========
+
+export default LoginScreen;
+>>>>>>>> Stashed changes:screens/Authorization/LoginScreen/LoginScreen.js
+>>>>>>> Stashed changes

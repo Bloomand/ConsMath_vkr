@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { login } from "../../src/firebaseApi/auth";
+import { login } from "../../../src/firebaseApi/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Login = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -123,3 +123,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+<<<<<<<< Updated upstream:screens/Login/Login.js
+========
+
+export default LoginScreen;
+>>>>>>>> Stashed changes:screens/Authorization/LoginScreen/LoginScreen.js

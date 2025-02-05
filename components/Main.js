@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width } = Dimensions.get('window');
 
-const Main = ({ navigation }) => {
+const MainMenuScreen = ({ navigation }) => {
 
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -57,7 +57,7 @@ const Main = ({ navigation }) => {
         </TouchableHighlight>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.buttonMenu} onPress={() => navigation.navigate('Context')}>
+      <TouchableOpacity style={styles.buttonMenu} onPress={() => navigation.navigate('MathInContext')}>
         <Text style={styles.text}>MATH IN CONTEXT</Text>
         <Tooltip
           isVisible={open3}
@@ -131,4 +131,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Main;
+export default MainMenuScreen;

@@ -5,12 +5,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+<<<<<<<< Updated upstream:screens/Registration/Registr.js
 import { useCallback, useEffect, useState } from "react";
 
+========
+import { signup } from "../../../src/firebaseApi/auth";
+>>>>>>>> Stashed changes:screens/Authorization/RegistrationScreen/RegistrationScreen.js
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { signup } from "../../src/firebaseApi/auth";
 
-const Registr = ({ navigation }) => {
+const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -83,7 +87,12 @@ const Registr = ({ navigation }) => {
     </View>
   );
 };
+<<<<<<<< Updated upstream:screens/Registration/Registr.js
 export default Registr;
+========
+
+export default RegistrationScreen;
+>>>>>>>> Stashed changes:screens/Authorization/RegistrationScreen/RegistrationScreen.js
 
 const styles = StyleSheet.create({
   Reg: {
