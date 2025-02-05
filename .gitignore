@@ -1,9 +1,5 @@
 # Logs
 logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Node modules
 node_modules/
@@ -15,30 +11,8 @@ npm_modules/
 # React Native packager cache
 packager-cache/
 
-# iOS
-ios/Pods/
-ios/build/
-ios/*.xcodeproj/
-ios/*.xcworkspace/
-ios/.DS_Store
-
-# Android
-android/.gradle/
-android/app/build/
-android/.cxx/
-android/local.properties
-
 # Expo
 .expo/
-.expo-shared/
-
-# IDE and editor files
-.vscode/
-.idea/
-*.sublime-workspace
-
-# Testing
-coverage/
 
 # Misc
 .env
@@ -47,16 +21,3 @@ coverage/
 # MacOS
 .DS_Store
 
-# Temporary files
-*.swp
-*.swo
-*.swn
-*.bak
-
-# Lint and build artifacts
-eslintcache/
-*.eslintcache
-babel.config.js.cache
-
-# TypeScript
-*.tsbuildinfo

@@ -1,27 +1,14 @@
+import { useState, useEffect, useCallback } from "react";
 import {
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
+  Button,
+  TouchableOpacity,
+  TextInput,
 } from "react-native";
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream:screens/RegistrationScreen/Registr.js
-import { useCallback, useEffect, useState } from "react";
-
-=======
 import { signup } from "../../../src/firebaseApi/auth";
->>>>>>> Stashed changes:screens/Authorization/RegistrationScreen/RegistrationScreen.js
-=======
-<<<<<<<< Updated upstream:screens/Registration/Registr.js
-import { useCallback, useEffect, useState } from "react";
-
-========
-import { signup } from "../../../src/firebaseApi/auth";
->>>>>>>> Stashed changes:screens/Authorization/RegistrationScreen/RegistrationScreen.js
->>>>>>> Stashed changes
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { signup } from "../../src/firebaseApi/auth";
 
 const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -53,6 +40,7 @@ const RegistrationScreen = ({ navigation }) => {
   useEffect(() => {
     redirect();
   }, [redirect, navigation]);
+
 
   return (
     <View style={styles.Reg}>
@@ -96,17 +84,8 @@ const RegistrationScreen = ({ navigation }) => {
     </View>
   );
 };
-<<<<<<< Updated upstream
 
 export default RegistrationScreen;
-=======
-<<<<<<<< Updated upstream:screens/Registration/Registr.js
-export default Registr;
-========
-
-export default RegistrationScreen;
->>>>>>>> Stashed changes:screens/Authorization/RegistrationScreen/RegistrationScreen.js
->>>>>>> Stashed changes
 
 const styles = StyleSheet.create({
   Reg: {
