@@ -1,39 +1,46 @@
-import { useState, useCallback, useEffect } from "react";
 import {
   StyleSheet,
   Text,
-  View,
-  Button,
-  TouchableOpacity,
   TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { login } from "../../src/firebaseApi/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+<<<<<<< Updated upstream:screens/RegistrationScreen/Registr.js
+import { useCallback, useEffect, useState } from "react";
 
-const Login = ({ navigation }) => {
+=======
+import { signup } from "../../../src/firebaseApi/auth";
+>>>>>>> Stashed changes:screens/Authorization/RegistrationScreen/RegistrationScreen.js
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { signup } from "../../src/firebaseApi/auth";
+
+const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
-  const logIn = useCallback(async () => {
+  const signUp = useCallback(async () => {
     try {
-      const { data } = await login(email, password);
-      console.log("Login successful", data);
+      const { data } = await signup(email, password);
+
+      setError(false);
+
+      await AsyncStorage.setItem("user-id", data.localId);
+
       navigation.navigate("Home");
     } catch (error) {
-      console.error("Error message:", error.message);
+      console.log("Error", error.message);
+      setError(true);
     }
   }, [email, password]);
 
   const redirect = useCallback(async () => {
     const userId = await AsyncStorage.getItem("user-id");
-    console.log("Retrieved userId:", userId);
 
     if (!userId) return;
     navigation.navigate("Home");
   }, []);
 
-  
   useEffect(() => {
     redirect();
   }, [redirect, navigation]);
@@ -59,29 +66,29 @@ const Login = ({ navigation }) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          logIn(email, password);
+          signUp(email, password);
         }}
       >
-        <Text style={styles.button_text}>Login!</Text>
+        <Text style={styles.button_text}>Registrate</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.button_link}
         onPress={() => {
-          navigation.navigate("Registration");
+          navigation.navigate("Login");
         }}
       >
-        <Text style={styles.button_link}>Registration</Text>
+        <Text style={styles.button_link}>Login</Text>
       </TouchableOpacity>
 
       {error && (
         <Text style={{ color: "red", textAlign: "center" }}>
-          Invalid login or password
+          User already exists
         </Text>
       )}
     </View>
   );
 };
 
+export default RegistrationScreen;
 
 const styles = StyleSheet.create({
   Reg: {
@@ -122,5 +129,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-export default Login;

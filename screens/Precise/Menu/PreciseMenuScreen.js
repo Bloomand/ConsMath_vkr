@@ -33,7 +33,7 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
   </TouchableOpacity>
 );
 
-const Precise = ({ navigation }) => {
+const PreciseMenuScreen = ({ navigation }) => {
 
   const [selectedDifficulty, setSelectedDifficulty] = useState('0');
   const [isEndlessMode, setIsEndlessMode] = useState(false);
@@ -59,20 +59,20 @@ const Precise = ({ navigation }) => {
       </View>
       <View style={styles.element2}>
         <View>
-          <Image style={styles.image} source={require('../../assets/images/graph.png')} />
+          <Image style={styles.image} source={require('../../../assets/images/graph.png')} />
           <Text style={styles.image_text}>Ranked Game</Text>
           <Text style={styles.image_text}>(1 min)</Text>
         </View>
         <Switch style={styles.switch} trackColor={{ true: '#223764', false: '#223764' }} thumbColor={'#223764'} ios_backgroundColor={'#223764'} onValueChange={toggleSwitch} value={isEndlessMode} />
         <View>
-          <Image style={styles.image} source={require('../../assets/images/infinite.png')} />
+          <Image style={styles.image} source={require('../../../assets/images/infinite.png')} />
           <Text style={styles.image_text}>Endless Mode</Text>
         </View>
       </View>
       <View style={styles.element3}>
         <FlatList data={DATA_type} renderItem={renderItem2} keyExtractor={item => item.id} extraData={selectedArif} contentContainerStyle={styles.centeredList} numColumns={3} />
       </View>
-      <TouchableOpacity style={styles.start} onPress={() => navigation.navigate(isEndlessMode ? 'EndlessGame' : 'RankedGame', { dificult: selectedDifficulty, mode: isEndlessMode, type: selectedArif })}>
+      <TouchableOpacity style={styles.start} onPress={() => navigation.navigate(isEndlessMode ? 'EndlessGamePrecise' : 'RankedGamePrecise', { dificult: selectedDifficulty, mode: isEndlessMode, type: selectedArif })}>
         <Text style={styles.text}>START GAME</Text>
       </TouchableOpacity>
     </View>
@@ -153,4 +153,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Precise;
+export default PreciseMenuScreen;
