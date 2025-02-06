@@ -9,6 +9,7 @@ import {
   Image,
   Dimensions
 } from 'react-native';
+import { styles } from "./PreciseMenuScreen.styles";
 
 const { width, height } = Dimensions.get('window');
 
@@ -78,79 +79,5 @@ const PreciseMenuScreen = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    justifyContent: 'space-around',
-    padding: width * 0.05,
-    backgroundColor: '#ccc'
-  },
-  element1: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: width * 0.02,
-    borderRadius: 10,
-    alignItems: 'center',
-    backgroundColor: '#fff'
-  },
-  centeredList: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexGrow: 1
-  },
-  element2: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: width * 0.02,
-    borderRadius: 10,
-    alignItems: 'center',
-    backgroundColor: '#fff'
-  },
-  item: {
-    width: width * 0.25,
-    height: width * 0.25,
-    margin: width * 0.005,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 5
-  },
-  image: {
-    margin: width * 0.03,
-    width: width * 0.22,
-    height: width * 0.2
-  },
-  image_text: {
-    width: width * 0.3,
-    fontSize: width * 0.045,
-    textAlign: 'center'
-  },
-  element3: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: width * 0.02,
-    borderRadius: 10,
-    alignItems: 'center',
-    backgroundColor: '#fff'
-  },
-  start: {
-    justifyContent: 'center',
-    padding: height * 0.05,
-    borderRadius: 10,
-    alignItems: 'center',
-    backgroundColor: '#223764'
-  },
-  text: {
-    fontSize: width * 0.05,
-    fontWeight: 'bold',
-    color: 'white'
-  },
-  title: {
-    fontSize: width * 0.05
-  },
-  switch: {
-    transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }]
-  }
-});
 
 export default PreciseMenuScreen;
