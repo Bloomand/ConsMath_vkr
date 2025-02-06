@@ -6,4 +6,4 @@ function App() {
     <AddNavigate />
   );
 };
-export default App
+export default App;

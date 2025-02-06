@@ -12,6 +12,8 @@ import {
   import { useSetUserInfo } from "../../../hooks/useSetUserInfo.js";
   import { useTotalRankInfo } from "../../../hooks/useTotalRankInfo.js";
   
+  import { styles } from "./PreciseEndlessGameScreen.styles.js";
+
   const TYPE = "precise";
   const SUBTYPE = "endless";
   

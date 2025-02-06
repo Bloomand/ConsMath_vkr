@@ -21,7 +21,7 @@ import MathInContextEndlessGameScreen from '../screens/MathInContext/EndlessGame
 const Stack = createNativeStackNavigator();
 
 const AddNavigate = () => (
-    <NavigationContainer initialRouteName="Login">
+    <NavigationContainer>
         <Stack.Navigator>
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Registration" component={RegistrationScreen} />
