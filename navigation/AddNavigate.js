@@ -23,8 +23,8 @@ const Stack = createNativeStackNavigator();
 const AddNavigate = () => (
     <NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} options={{ headerBackVisible: false }} />
+            <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerBackVisible: false }} />
             <Stack.Screen name="Home" component={MainMenuScreen} options={{ title: ' ' }} />
             <Stack.Screen name="Precise" component={PreciseMenuScreen} />
             <Stack.Screen name="Estimation" component={EstimationMenuScreen} />
