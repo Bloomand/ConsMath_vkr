@@ -25,7 +25,7 @@ const AddNavigate = () => (
         <Stack.Navigator>
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerBackVisible: false }} />
             <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerBackVisible: false }} />
-            <Stack.Screen name="Home" component={MainMenuScreen} options={{ title: ' ' }} />
+            <Stack.Screen name="Home" component={MainMenuScreen} options={{ title: ' ', headerBackVisible: false }} />
             <Stack.Screen name="Precise" component={PreciseMenuScreen} />
             <Stack.Screen name="Estimation" component={EstimationMenuScreen} />
             <Stack.Screen name="MathInContext" component={MathInContextMenuScreen} />
