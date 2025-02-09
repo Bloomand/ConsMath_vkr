@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState } from 'react';
 import {
   View,
   FlatList,
@@ -6,99 +6,70 @@ import {
   TouchableOpacity,
   Switch,
   Image,
-} from "react-native";
-import { styles } from "./PreciseMenuScreen.styles";
-import { DIFFICULTY_OPTIONS, OPERATION_TYPES } from "../../../utils/constants/preciseGameData";
-import SelectableItem from "../../../components/SelectableItem";
+} from 'react-native';
+import { styles } from './PreciseMenuScreen.styles';
+
+const DATA_difficult = [
+  { id: '0', title: 'Easy' },
+  { id: '1', title: 'Medium' },
+  { id: '2', title: 'Hard' }
+];
+
+const DATA_type = [
+  { id: '0', title: '+' },
+  { id: '1', title: '-' },
+  { id: '2', title: 'x' },
+  { id: '3', title: '/' },
+  { id: '4', title: '%' },
+  { id: '5', title: 'Random' }
+];
+
+const Item = ({ item, onPress, backgroundColor, textColor }) => (
+  <TouchableOpacity onPress={onPress} style={[styles.item, { backgroundColor }]}>
+    <Text style={[styles.title, { color: textColor }]}>{item.title}</Text>
+  </TouchableOpacity>
+);
 
 const PreciseMenuScreen = ({ navigation }) => {
-  const [selectedDifficulty, setSelectedDifficulty] = useState("0");
+
+  const [selectedDifficulty, setSelectedDifficulty] = useState('0');
   const [isEndlessMode, setIsEndlessMode] = useState(false);
-  const [selectedType, setSelectedType] = useState("0");
+  const [selectedArif, setSelectedArif] = useState('0');
+  const toggleSwitch = () => setIsEndlessMode(prevState => !prevState);
 
-  const toggleSwitch = useCallback(() => {
-    setIsEndlessMode((prev) => !prev);
-  }, []);
+  const renderItem = ({ item }) => {
+    const backgroundColor = item.id === selectedDifficulty ? '#223764' : '#86bfe8';
+    const color = item.id === selectedDifficulty ? 'white' : 'black';
+    return <Item item={item} onPress={() => setSelectedDifficulty(item.id)} backgroundColor={backgroundColor} textColor={color} />;
+  };
 
-  const handleSelectionChange = useCallback((type, id) => {
-    if (type === "difficulty") setSelectedDifficulty(id);
-    if (type === "type") setSelectedType(id);
-  }, []);
-
-  const difficultyList = useMemo(
-    () => (
-      <FlatList
-        horizontal
-        data={DIFFICULTY_OPTIONS}
-        renderItem={({ item }) => (
-          <SelectableItem item={item} isSelected={item.id === selectedDifficulty} onPress={() => handleSelectionChange("difficulty", item.id)} />
-        )}
-        keyExtractor={(item) => item.id}
-        extraData={selectedDifficulty}
-        contentContainerStyle={styles.centeredList}
-      />
-    ),
-    [selectedDifficulty, handleSelectionChange]
-  );
-
-  const operationTypeList = useMemo(
-    () => (
-      <FlatList
-        data={OPERATION_TYPES}
-        renderItem={({ item }) => (
-          <SelectableItem item={item} isSelected={item.id === selectedType} onPress={() => handleSelectionChange("type", item.id)} />
-        )}
-        keyExtractor={(item) => item.id}
-        extraData={selectedType}
-        contentContainerStyle={styles.centeredList}
-        numColumns={3}
-      />
-    ),
-    [selectedType, handleSelectionChange]
-  );
+  const renderItem2 = ({ item }) => {
+    const backgroundColor = item.id === selectedArif ? '#223764' : '#86bfe8';
+    const color = item.id === selectedArif ? 'white' : 'black';
+    return <Item item={item} onPress={() => setSelectedArif(item.id)} backgroundColor={backgroundColor} textColor={color} />;
+  };
 
   return (
     <View style={styles.main}>
-      {/* Выбор сложности */}
-      <View style={styles.element1}>{difficultyList}</View>
-
-      {/* Режимы игры */}
+      <View style={styles.element1}>
+        <FlatList horizontal data={DATA_difficult} renderItem={renderItem} keyExtractor={item => item.id} extraData={selectedDifficulty} contentContainerStyle={styles.centeredList} />
+      </View>
       <View style={styles.element2}>
         <View>
-          <Image style={styles.image} source={require("../../../assets/images/graph.png")} />
+          <Image style={styles.image} source={require('../../../assets/images/graph.png')} />
           <Text style={styles.image_text}>Ranked Game</Text>
           <Text style={styles.image_text}>(1 min)</Text>
         </View>
-
-        <Switch
-          style={styles.switch}
-          trackColor={{ true: "#223764", false: "#223764" }}
-          thumbColor={"#223764"}
-          ios_backgroundColor={"#223764"}
-          onValueChange={toggleSwitch}
-          value={isEndlessMode}
-        />
-
+        <Switch style={styles.switch} trackColor={{ true: '#223764', false: '#223764' }} thumbColor={'#223764'} ios_backgroundColor={'#223764'} onValueChange={toggleSwitch} value={isEndlessMode} />
         <View>
-          <Image style={styles.image} source={require("../../../assets/images/infinite.png")} />
+          <Image style={styles.image} source={require('../../../assets/images/infinite.png')} />
           <Text style={styles.image_text}>Endless Mode</Text>
         </View>
       </View>
-
-      {/* Выбор типа операции */}
-      <View style={styles.element3}>{operationTypeList}</View>
-
-      {/* Кнопка старта игры */}
-      <TouchableOpacity
-        style={styles.start}
-        onPress={() =>
-          navigation.navigate(isEndlessMode ? "EndlessGamePrecise" : "RankedGamePrecise", {
-            difficulty: selectedDifficulty,
-            mode: isEndlessMode,
-            type: selectedType,
-          })
-        }
-      >
+      <View style={styles.element3}>
+        <FlatList data={DATA_type} renderItem={renderItem2} keyExtractor={item => item.id} extraData={selectedArif} contentContainerStyle={styles.centeredList} numColumns={3} />
+      </View>
+      <TouchableOpacity style={styles.start} onPress={() => navigation.navigate(isEndlessMode ? 'EndlessGamePrecise' : 'RankedGamePrecise', { dificult: selectedDifficulty, mode: isEndlessMode, type: selectedArif })}>
         <Text style={styles.text}>START GAME</Text>
       </TouchableOpacity>
     </View>
