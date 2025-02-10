@@ -59,7 +59,7 @@ import {
           <View style={styles.EndlessGame}>
             <Text></Text>
             <Game
-              dificult={route.params.dificult}
+              difficulty={route.params.difficulty}
               type={route.params.type}
               setData={setData}
               setNon={setNon}

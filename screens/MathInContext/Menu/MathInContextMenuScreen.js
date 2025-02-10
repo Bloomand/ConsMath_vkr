@@ -1,38 +1,44 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Switch,
-  Image,
-} from 'react-native';
-
+import { View, Text, TouchableOpacity, Switch } from 'react-native';
 import { styles } from './MathInContextMenuScreen.styles';
+import GameModeOption from '../../../components/GameModeOption/GameModeOption';
 
 const MathInContextMenuScreen = ({ navigation }) => {
   const [isEndlessMode, setIsEndlessMode] = useState(false);
-  const toggleSwitch = () => setIsEndlessMode(prevState => !prevState);
-
+  const toggleSwitch = () => setIsEndlessMode(prev => !prev);
 
   return (
     <View style={styles.main}>
       <View style={styles.element2}>
-        <View>
-          <Image style={styles.image} source={require('../../../assets/images/graph.png')} />
-          <Text style={styles.image_text}>Ranked Game</Text>
-          <Text style={styles.image_text}>(1 min)</Text>
-        </View>
-        <Switch style={styles.switch} trackColor={{ true: '#223764', false: '#223764' }} thumbColor={'#223764'} ios_backgroundColor={'#223764'} onValueChange={toggleSwitch} value={isEndlessMode} />
-        <View>
-          <Image style={styles.image} source={require('../../../assets/images/infinite.png')} />
-          <Text style={styles.image_text}>Endless Mode</Text>
-        </View>
+        <GameModeOption
+          imageSource={require('../../../assets/images/graph.png')}
+          title="Ranked Game"
+          subtitle="(1 min)"
+        />
+        <Switch
+          style={styles.switch}
+          trackColor={{ true: '#223764', false: '#223764' }}
+          thumbColor={'#223764'}
+          ios_backgroundColor={'#223764'}
+          onValueChange={toggleSwitch}
+          value={isEndlessMode}
+        />
+        <GameModeOption
+          imageSource={require('../../../assets/images/infinite.png')}
+          title="Endless Mode"
+        />
       </View>
-      <TouchableOpacity style={styles.start} onPress={() => navigation.navigate(isEndlessMode ? 'EndlessGameMathInContext' : 'RankedGameMathInContext', { mode: isEndlessMode })}>
+      <TouchableOpacity
+        style={styles.start}
+        onPress={() => navigation.navigate(
+          isEndlessMode ? 'EndlessGameMathInContext' : 'RankedGameMathInContext',
+          { mode: isEndlessMode }
+        )}
+      >
         <Text style={styles.text}>START GAME</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 export default MathInContextMenuScreen;

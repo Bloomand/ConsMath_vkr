@@ -64,10 +64,10 @@ import { styles } from "./EstimationRankedGameScreen.styles.js";
         </View>
       );
   
-      if (route.params.dificult == 1) {
+      if (route.params.difficulty == 1) {
         setTimer(180);
         setTime(180);
-      } else if (route.params.dificult == 2) {
+      } else if (route.params.difficulty == 2) {
         setTimer(240);
         setTime(240);
       }
@@ -93,7 +93,7 @@ import { styles } from "./EstimationRankedGameScreen.styles.js";
               <Text style={styles.timerText}>{viewTimer}</Text>
             </View>
             <GameEst
-              dificult={route.params.dificult}
+              difficulty={route.params.difficulty}
               type={route.params.type}
               setData={setData}
               setNon={setNon}

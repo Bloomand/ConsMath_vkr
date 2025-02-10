@@ -28,13 +28,13 @@ const Game = (props, route) => {
   }
 
   function addition() {
-    if (props.dificult == 0) {
+    if (props.difficulty == 0) {
       setCurNum1(getRandomInt(1, 20));
       setCurNum2(getRandomInt(1, 20));
-    } else if (props.dificult == 1) {
+    } else if (props.difficulty == 1) {
       setCurNum1(getRandomInt(1, 100));
       setCurNum2(getRandomInt(1, 100));
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       setCurNum1(getRandomInt(10, 999));
       setCurNum2(getRandomInt(10, 99));
     }
@@ -42,17 +42,17 @@ const Game = (props, route) => {
   }
 
   function subtraction() {
-    if (props.dificult == 0) {
+    if (props.difficulty == 0) {
       setCurNum1(getRandomInt(3, 39));
       setCurNum2(getRandomInt(1, 20));
-    } else if (props.dificult == 1) {
+    } else if (props.difficulty == 1) {
       setCurNum1(getRandomInt(41, 120));
       let dop2 = getRandomInt(3, 99);
       while (dop2 == 10) {
         dop2 = getRandomInt(3, 99);
       }
       setCurNum2(dop2);
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       setCurNum1(getRandomInt(3, 300));
       let dop2 = getRandomInt(11, 199);
       while (dop2 % 10 == 0) {
@@ -64,10 +64,10 @@ const Game = (props, route) => {
   }
 
   function multiplication() {
-    if (props.dificult == 0) {
+    if (props.difficulty == 0) {
       setCurNum1(getRandomInt(1, 10));
       setCurNum2(getRandomInt(1, 10));
-    } else if (props.dificult == 1) {
+    } else if (props.difficulty == 1) {
       let dop1 = getRandomInt(1, 19);
       let dop2 = getRandomInt(1, 19);
 
@@ -77,7 +77,7 @@ const Game = (props, route) => {
       dop2 *= Math.pow(10, zero);
       setCurNum1(dop1);
       setCurNum2(dop2);
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       let dop1 = getRandomInt(3, 300);
       let dop2 = getRandomInt(11, 199);
 
@@ -92,12 +92,12 @@ const Game = (props, route) => {
   }
 
   function division() {
-    if (props.dificult == 0) {
+    if (props.difficulty == 0) {
       let dop1 = getRandomInt(1, 10);
       let rez = getRandomInt(1, 10);
       setCurNum2(dop1);
       setCurNum1(dop1 * rez);
-    } else if (props.dificult == 1) {
+    } else if (props.difficulty == 1) {
       let dop1 = getRandomInt(1, 10);
       let rez = getRandomInt(1, 10);
       let zero = getRandomInt(0, 1);
@@ -107,7 +107,7 @@ const Game = (props, route) => {
       rez *= Math.pow(10, zero);
       setCurNum2(dop1);
       setCurNum1(dop1 * rez);
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       let dop1 = getRandomInt(1, 10);
       let rez = getRandomInt(1, 10);
       let zero = getRandomInt(0, 1);
@@ -123,17 +123,17 @@ const Game = (props, route) => {
 
   function percent() {
     const percents = [10, 20, 30, 40, 50, 60, 70, 80, 90, 25, 75];
-    if (props.dificult == 0) {
+    if (props.difficulty == 0) {
       setCurNum1(getRandomInt(1, 9) * 10);
       setCurNum2(getRandomInt(1, 10) * 10);
-    } else if (props.dificult == 1) {
+    } else if (props.difficulty == 1) {
       let zero = getRandomInt(2, 5);
       let dop2 = getRandomInt(1, 9) * Math.pow(10, zero);
 
       let dop1 = getRandomInt(0, 10);
       setCurNum1(percents[dop1]);
       setCurNum2(dop2);
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       let zero = getRandomInt(2, 9);
       let dop2 = getRandomInt(1, 9) * Math.pow(10, zero);
 

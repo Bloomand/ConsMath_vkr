@@ -64,13 +64,13 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
       </View>
     );
 
-    if (route.params.dificult == 0) {
+    if (route.params.difficulty == 0) {
       setTimer(60);
       setTime(60);
-    } else if (route.params.dificult == 1) {
+    } else if (route.params.difficulty == 1) {
       setTimer(180);
       setTime(180);
-    } else if (route.params.dificult == 2) {
+    } else if (route.params.difficulty == 2) {
       setTimer(240);
       setTime(240);
     }
@@ -96,7 +96,7 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
             <Text style={styles.timerText}>{viewTimer}</Text>
           </View>
           <Game
-            dificult={route.params.dificult}
+            difficulty={route.params.difficulty}
             type={route.params.type}
             setData={setData}
             setNon={setNon}
