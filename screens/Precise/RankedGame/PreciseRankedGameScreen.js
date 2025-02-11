@@ -50,11 +50,7 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
   }, [timerCount]);
 
   useEffect(() => {
-    if (route.params.mode) {
-      route.params.mode = 1;
-    } else {
-      route.params.mode = 0;
-    }
+    const mode = route.params.mode ? 1 : 0
     setComponent(
       <View style={styles.RankedGame}>
         <View style={styles.timer}>
