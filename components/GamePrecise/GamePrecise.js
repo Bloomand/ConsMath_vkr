@@ -2,15 +2,15 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import {
-  StyleSheet,
   Text,
   View,
-  Button,
   TouchableOpacity,
   TextInput,
 } from "react-native";
 
-const Game = (props, route) => {
+import { styles } from "./GamePrecise.styles";
+
+const GamePrecise = (props, route) => {
   const [curNum1, setCurNum1] = useState(14344);
 
   const [curArif, setCurArif] = useState("+");
@@ -292,66 +292,4 @@ const Game = (props, route) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  Game: {
-    flex: 1,
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: 20,
-    paddingRight: 20,
-    backgroundColor: "#ccc",
-  },
-  question: {
-    //margin: 10,
-    width: 300,
-    padding: 20,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    borderRadius: 5,
-    backgroundColor: "#fff",
-  },
-  question_element: {
-    //padding: 5,
-    fontSize: 20,
-  },
-  input: {
-    marginTop: 20,
-    padding: 15,
-    width: 300,
-    fontSize: 20,
-    alignItems: "center",
-    borderRadius: 5,
-    backgroundColor: "#fff",
-  },
-  button: {
-    margin: 20,
-    padding: 15,
-    width: 300,
-    alignItems: "center",
-    borderRadius: 5,
-    backgroundColor: "#223764",
-    color: "#fff",
-  },
-  button_exit: {
-    margin: 30,
-    padding: 10,
-    width: 250,
-    alignItems: "center",
-    borderRadius: 5,
-    backgroundColor: "#86bfe8",
-  },
-  button_text: {
-    fontSize: 18,
-    color: "#fff",
-    textAlign: "center",
-  },
-  button_text_ex: {
-    fontSize: 18,
-    color: "#fff",
-    textAlign: "center",
-    color: "black",
-  },
-});
-
-export default Game;
+export default GamePrecise;
