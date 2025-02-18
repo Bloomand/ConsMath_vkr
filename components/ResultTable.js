@@ -1,64 +1,116 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AnswerList from "./AnswerList"; // <-- Импортируем новый компонент
 
-const ResultTable = ({ data, scoreData, mean, twentyPercentMean, time, styles }) => {
-  const listAnswers = data.map((element, index) => {
-    const { num1, num2, arif, answer, expect } = element;
-    let answerText = `Your answer is ${answer}`;
-    let percentError = answer === expect ? 0 : 100;
-    let backgroundColor = answer === expect ? "#bfdbc5" : "#dbc0c5";
+function parseValue(val) {
+  if (val === null || val === undefined) return null;
+  if (typeof val === "number") return val;
+  if (typeof val === "string" && val.trim() !== "") {
+    const parsed = parseFloat(val.trim());
+    return isNaN(parsed) ? null : parsed;
+  }
+  return null;
+}
 
-    if (answer === "") {
-      answerText = "No answer was provided.";
-    }
+const ResultTable = ({
+  data,
+  scoreData,
+  mean,
+  twentyPercentMean,
+  time,
+  styles,
+  trainingType
+}) => {
+  const isEndless = trainingType === "Endless";
+
+  // Подсчитываем количество правильных/неправильных ответов
+  const totalAnswers = data.length;
+  const rightAnswers = data.filter((el) => {
+    const pA = parseValue(el.answer);
+    const pE = parseValue(el.expect);
+    return pA !== null && pA === pE;
+  }).length;
+  const wrongAnswers = totalAnswers - rightAnswers;
+
+  // Среднее время на вопрос (если не endless)
+  const secondsPerQuestion = isEndless
+    ? "N/A"
+    : totalAnswers > 0
+    ? Math.floor(time / totalAnswers)
+    : 0;
+
+  // Данные для таблицы
+  const stats = [
+    { label: "Total answers", value: totalAnswers, key: "total" },
+    { label: "Right answers", value: rightAnswers, key: "right" },
+    { label: "Wrong answers", value: wrongAnswers, key: "wrong" },
+    { label: "Seconds per question", value: secondsPerQuestion, key: "seconds" }
+  ];
+
+  // Рендер одной строки таблицы
+  const renderTableRow = (label, key) => {
+    const statItem = stats.find((s) => s.key === key);
+    const yourResultValue = statItem ? statItem.value : "N/A";
+
+    // Берём значения из scoreData, mean, twentyPercentMean
+    const yourBestResult = scoreData[key];
+    const allUsers = mean[key];
+    const top20 = twentyPercentMean[key];
+
+    // Для endless-режима seconds = "N/A"
+    const displayValue = isEndless && key === "seconds" ? "N/A" : yourResultValue;
+    const displayBest = isEndless && key === "seconds" ? "N/A" : yourBestResult;
+    const displayAll = isEndless && key === "seconds" ? "N/A" : allUsers;
+    const displayTop20 = isEndless && key === "seconds" ? "N/A" : top20;
 
     return (
-      <View key={index} style={[styles.item, { backgroundColor }]}>
-        <View style={styles.num_item}>
-          <Text>#{index + 1}</Text>
+      <View style={styles.table_line} key={key}>
+        <View style={styles.element_view}>
+          <Text style={styles.element}>{label}</Text>
         </View>
-        <View>
-          <Text>
-            {num1.toLocaleString()} {arif} {num2.toLocaleString()}
-          </Text>
-          <Text>= {expect.toLocaleString()}</Text>
-          <Text style={styles.text_bold}>{answerText}</Text>
-          <Text style={styles.text_bold}>Error is {percentError}%</Text>
+        <View style={styles.element_view}>
+          <Text style={styles.element}>{displayValue}</Text>
+        </View>
+        <View style={styles.element_view}>
+          <Text style={styles.element}>{displayBest}</Text>
+        </View>
+        <View style={styles.element_view}>
+          <Text style={styles.element}>{displayAll}</Text>
+        </View>
+        <View style={styles.element_view}>
+          <Text style={styles.element}>{displayTop20}</Text>
         </View>
       </View>
     );
-  });
-
-  const rightAnswers = data.filter((el) => el.answer === el.expect).length;
-  const stats = [
-    { label: "Total answers", value: data.length, key: "total" },
-    { label: "Right answers", value: rightAnswers, key: "right" },
-    { label: "Wrong answers", value: data.length - rightAnswers, key: "wrong" },
-    { label: "Seconds per question", value: Math.floor(time / data.length), key: "seconds" },
-  ];
+  };
 
   return (
     <View>
+      {/* Шапка таблицы */}
       <View style={styles.table_line}>
-        {["o", "Your result", "Your best result", "All users", "Top 20% users"].map((header, index) => (
-          <View key={index} style={styles.header_view}>
-            <Text style={styles.header}>{header}</Text>
-          </View>
-        ))}
+        <View style={styles.header_view}>
+          <Text style={styles.header}>o</Text>
+        </View>
+        <View style={styles.header_view}>
+          <Text style={styles.header}>Your result</Text>
+        </View>
+        <View style={styles.header_view}>
+          <Text style={styles.header}>Your best result</Text>
+        </View>
+        <View style={styles.header_view}>
+          <Text style={styles.header}>All users</Text>
+        </View>
+        <View style={styles.header_view}>
+          <Text style={styles.header}>Top 20% users</Text>
+        </View>
       </View>
 
-      {stats.map(({ label, value, key }) => (
-        <View key={key} style={styles.table_line}>
-          {[label, value, scoreData[key], mean[key], twentyPercentMean[key]].map((item, index) => (
-            <View key={index} style={styles.element_view}>
-              <Text style={styles.element}>{item}</Text>
-            </View>
-          ))}
-        </View>
-      ))}
+      {/* Строки таблицы со статистикой */}
+      {stats.map((stat) => renderTableRow(stat.label, stat.key))}
 
-      <ScrollView>{listAnswers}</ScrollView>
+      {/* А здесь уже выводим наш новый компонент с подробными ответами */}
+      <AnswerList data={data} styles={styles} />
     </View>
   );
 };

@@ -103,6 +103,7 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
           twentyPercentMean={twentyPercentMean}
           time={time}
           styles={styles}
+          trainingType="Timed" 
         />
         <ScrollView><AnswerList data={data} styles={styles} /></ScrollView>
       </View>

@@ -1,8 +1,5 @@
-import {
-  Text,
-  View,
-} from "react-native";
 import React, { useState, useEffect, useMemo } from "react";
+import { Text, View, ScrollView } from "react-native";
 import GamePrecise from "../../../components/GamePrecise/GamePrecise.js";
 
 import { useUserInfo } from "../../../hooks/useUserInfo.js";
@@ -69,8 +66,9 @@ const PreciseEndlessGameScreen = ({ navigation, route }) => {
             twentyPercentMean={twentyPercentMean}
             time={timerCount}
             styles={styles}
+            trainingType="Endless"
           />
-          <AnswerList data={data} styles={styles} />
+          <ScrollView><AnswerList data={data} styles={styles} /></ScrollView>
         </View>
       );
     }
