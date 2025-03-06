@@ -6,7 +6,7 @@ import {
     ScrollView,
   } from "react-native";
   import React, { useState, useMemo, useEffect } from "react";
-  import GameEst from "../../../components/GameEst.js";
+  import GameEstimation from "../../../components/GameEstimation/GameEstimation.js";
   import { SafeAreaView } from "react-native-safe-area-context";
   import { useUserInfo } from "../../../hooks/useUserInfo.js";
   import { useSetUserInfo } from "../../../hooks/useSetUserInfo.js";
@@ -92,7 +92,7 @@ import { styles } from "./EstimationRankedGameScreen.styles.js";
             <View style={styles.timer}>
               <Text style={styles.timerText}>{viewTimer}</Text>
             </View>
-            <GameEst
+            <GameEstimation
               difficulty={route.params.difficulty}
               type={route.params.type}
               setData={setData}
