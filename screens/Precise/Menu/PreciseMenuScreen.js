@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState } from 'react';
 import {
   View,
@@ -33,6 +34,15 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
     <Text style={[styles.title, { color: textColor }]}>{item.title}</Text>
   </TouchableOpacity>
 );
+=======
+import React, { useState, useCallback } from 'react';
+import { View, FlatList, Text, TouchableOpacity, Switch, Image } from 'react-native';
+import { styles } from './PreciseMenuScreen.styles';
+import GameModeOption from '../../../components/GameModeOption/GameModeOption';
+import SelectableItem from '../../../components/SelectableItem';
+import { DIFFICULTY_OPTIONS, OPERATION_TYPES } from '../../../utils/constants/preciseGameData';
+import { getSubtitleByDifficulty } from '../../../utils/helpers/getSubtitleByDifficulty';
+>>>>>>> Stashed changes
 
 const PreciseMenuScreen = ({ navigation }) => {
 
@@ -59,6 +69,7 @@ const PreciseMenuScreen = ({ navigation }) => {
         <FlatList horizontal data={DATA_difficult} renderItem={renderItem} keyExtractor={item => item.id} extraData={selectedDifficulty} contentContainerStyle={styles.centeredList} />
       </View>
       <View style={styles.element2}>
+<<<<<<< Updated upstream
         <View>
           <Image style={styles.image} source={require('../../../assets/images/graph.png')} />
           <Text style={styles.image_text}>Ranked Game</Text>
@@ -69,6 +80,25 @@ const PreciseMenuScreen = ({ navigation }) => {
           <Image style={styles.image} source={require('../../../assets/images/infinite.png')} />
           <Text style={styles.image_text}>Endless Mode</Text>
         </View>
+=======
+      <GameModeOption
+          imageSource={require('../../../assets/images/graph.png')}
+          title="Ranked Game"
+          subtitle={getSubtitleByDifficulty(selectedDifficulty)}
+        />
+        <Switch
+          style={styles.switch}
+          trackColor={{ true: '#223764', false: '#223764' }}
+          thumbColor={'#223764'}
+          ios_backgroundColor={'#223764'}
+          onValueChange={toggleSwitch}
+          value={isEndlessMode}
+        />
+        <GameModeOption
+          imageSource={require('../../../assets/images/infinite.png')}
+          title="Endless Mode"
+        />
+>>>>>>> Stashed changes
       </View>
       <View style={styles.element3}>
         <FlatList data={DATA_type} renderItem={renderItem2} keyExtractor={item => item.id} extraData={selectedArif} contentContainerStyle={styles.centeredList} numColumns={3} />

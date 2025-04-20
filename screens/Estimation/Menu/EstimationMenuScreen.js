@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import { styles } from './EstimationMenuScreen.styles';
+<<<<<<< Updated upstream
 
 const DATA_difficult = [
   { id: '1', title: 'Medium' },
@@ -32,6 +33,10 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
   </TouchableOpacity>
 );
 
+=======
+import { DIFFICULTY_OPTIONS, OPERATION_TYPES } from '../../../utils/constants/estimationGameData';
+import { getSubtitleByDifficulty } from '../../../utils/helpers/getSubtitleByDifficulty';
+>>>>>>> Stashed changes
 
 const EstimationMenuScreen = ({ navigation }) => {
   const [selectedDifficulty, setSelectedDifficulty] = useState('1');
@@ -57,12 +62,22 @@ const EstimationMenuScreen = ({ navigation }) => {
         <FlatList horizontal data={DATA_difficult} renderItem={renderItem} keyExtractor={item => item.id} extraData={selectedDifficulty} contentContainerStyle={styles.centeredList} />
       </View>
       <View style={styles.element2}>
+<<<<<<< Updated upstream
         <View>
           <Image style={styles.image} source={require('../../../assets/images/graph.png')} />
           <Text style={styles.image_text}>Ranked Game</Text>
           <Text style={styles.image_text}>(1 min)</Text>
         </View>
         <Switch style={styles.switch}
+=======
+        <GameModeOption
+          imageSource={require('../../../assets/images/graph.png')}
+          title="Ranked Game"
+          subtitle={getSubtitleByDifficulty(selectedDifficulty)}
+        />
+        <Switch
+          style={styles.switch}
+>>>>>>> Stashed changes
           trackColor={{ true: '#223764', false: '#223764' }}
           thumbColor={'#223764'}
           ios_backgroundColor={'#223764'}
