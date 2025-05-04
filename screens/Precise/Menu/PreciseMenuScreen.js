@@ -4,6 +4,10 @@ import { styles } from './PreciseMenuScreen.styles';
 import GameModeOption from '../../../components/GameModeOption/GameModeOption';
 import SelectableItem from '../../../components/SelectableItem';
 import { DIFFICULTY_OPTIONS, OPERATION_TYPES } from '../../../utils/constants/preciseGameData';
+<<<<<<< Updated upstream
+=======
+import { getSubtitleByDifficulty } from '../../../utils/helpers/getSubtitleByDifficulty';
+>>>>>>> Stashed changes
 
 const PreciseMenuScreen = ({ navigation }) => {
   const [selectedDifficulty, setSelectedDifficulty] = useState('0');

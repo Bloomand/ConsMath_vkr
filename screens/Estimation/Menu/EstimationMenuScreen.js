@@ -4,6 +4,10 @@ import GameModeOption from '../../../components/GameModeOption/GameModeOption';
 import SelectableItem from '../../../components/SelectableItem';
 import { styles } from './EstimationMenuScreen.styles';
 import { DIFFICULTY_OPTIONS, OPERATION_TYPES } from '../../../utils/constants/estimationGameData';
+<<<<<<< Updated upstream
+=======
+import { getSubtitleByDifficulty } from '../../../utils/helpers/getSubtitleByDifficulty';
+>>>>>>> Stashed changes
 
 const EstimationMenuScreen = ({ navigation }) => {
   const [selectedDifficulty, setSelectedDifficulty] = useState('1');
