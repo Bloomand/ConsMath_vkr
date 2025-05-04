@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#ccc",
   },
   question: {
-    //margin: 10,
     width: 300,
     padding: 20,
     display: "flex",
@@ -20,7 +19,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   question_element: {
-    //padding: 5,
     fontSize: 20,
   },
   input: {

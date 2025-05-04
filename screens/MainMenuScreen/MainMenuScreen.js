@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./MainMenuScreen.styles";
 import { mainMenuItems } from "../../utils/constants/mainMenuItems";
 
+
 const MainMenuScreen = ({ navigation }) => {
   const [tooltipVisible, setTooltipVisible] = useState(() =>
     mainMenuItems.reduce((acc, item) => ({ ...acc, [item.key]: false }), {})

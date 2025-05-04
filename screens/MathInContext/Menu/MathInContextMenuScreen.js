@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Switch } from 'react-native';
 import { styles } from './MathInContextMenuScreen.styles';
 import GameModeOption from '../../../components/GameModeOption/GameModeOption';
 
+
 const MathInContextMenuScreen = ({ navigation }) => {
   const [isEndlessMode, setIsEndlessMode] = useState(false);
   const toggleSwitch = () => setIsEndlessMode(prev => !prev);
@@ -42,3 +43,4 @@ const MathInContextMenuScreen = ({ navigation }) => {
 };
 
 export default MathInContextMenuScreen;
+

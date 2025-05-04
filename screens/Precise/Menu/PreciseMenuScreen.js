@@ -4,10 +4,7 @@ import { styles } from './PreciseMenuScreen.styles';
 import GameModeOption from '../../../components/GameModeOption/GameModeOption';
 import SelectableItem from '../../../components/SelectableItem';
 import { DIFFICULTY_OPTIONS, OPERATION_TYPES } from '../../../utils/constants/preciseGameData';
-<<<<<<< Updated upstream
-=======
 import { getSubtitleByDifficulty } from '../../../utils/helpers/getSubtitleByDifficulty';
->>>>>>> Stashed changes
 
 const PreciseMenuScreen = ({ navigation }) => {
   const [selectedDifficulty, setSelectedDifficulty] = useState('0');
@@ -40,7 +37,7 @@ const PreciseMenuScreen = ({ navigation }) => {
       <GameModeOption
           imageSource={require('../../../assets/images/graph.png')}
           title="Ranked Game"
-          subtitle="(1 min)"
+          subtitle={getSubtitleByDifficulty(selectedDifficulty)}
         />
         <Switch
           style={styles.switch}

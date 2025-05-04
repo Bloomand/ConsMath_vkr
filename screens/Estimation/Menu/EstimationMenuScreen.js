@@ -4,10 +4,7 @@ import GameModeOption from '../../../components/GameModeOption/GameModeOption';
 import SelectableItem from '../../../components/SelectableItem';
 import { styles } from './EstimationMenuScreen.styles';
 import { DIFFICULTY_OPTIONS, OPERATION_TYPES } from '../../../utils/constants/estimationGameData';
-<<<<<<< Updated upstream
-=======
 import { getSubtitleByDifficulty } from '../../../utils/helpers/getSubtitleByDifficulty';
->>>>>>> Stashed changes
 
 const EstimationMenuScreen = ({ navigation }) => {
   const [selectedDifficulty, setSelectedDifficulty] = useState('1');
@@ -40,7 +37,7 @@ const EstimationMenuScreen = ({ navigation }) => {
         <GameModeOption
           imageSource={require('../../../assets/images/graph.png')}
           title="Ranked Game"
-          subtitle="(1 min)"
+          subtitle={getSubtitleByDifficulty(selectedDifficulty)}
         />
         <Switch
           style={styles.switch}
