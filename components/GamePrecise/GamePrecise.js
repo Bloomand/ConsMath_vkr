@@ -1,18 +1,9 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Text, View, TouchableOpacity, TextInput } from "react-native";
+import { styles } from "./GamePrecise.styles";
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
-
-const Game = (props, route) => {
+const GamePrecise = ({ difficulty, type, setData, setTimer, setNon }) => {
   const [curNum1, setCurNum1] = useState(14344);
-
   const [curArif, setCurArif] = useState("+");
   const [curNum2, setCurNum2] = useState(56344);
   const [curExpect, setCurExpect] = useState();
@@ -28,13 +19,13 @@ const Game = (props, route) => {
   }
 
   function addition() {
-    if (props.dificult == 0) {
+    if (difficulty == 0) {
       setCurNum1(getRandomInt(1, 20));
       setCurNum2(getRandomInt(1, 20));
-    } else if (props.dificult == 1) {
+    } else if (difficulty == 1) {
       setCurNum1(getRandomInt(1, 100));
       setCurNum2(getRandomInt(1, 100));
-    } else if (props.dificult == 2) {
+    } else if (difficulty == 2) {
       setCurNum1(getRandomInt(10, 999));
       setCurNum2(getRandomInt(10, 99));
     }
@@ -42,17 +33,17 @@ const Game = (props, route) => {
   }
 
   function subtraction() {
-    if (props.dificult == 0) {
+    if (difficulty == 0) {
       setCurNum1(getRandomInt(3, 39));
       setCurNum2(getRandomInt(1, 20));
-    } else if (props.dificult == 1) {
+    } else if (difficulty == 1) {
       setCurNum1(getRandomInt(41, 120));
       let dop2 = getRandomInt(3, 99);
       while (dop2 == 10) {
         dop2 = getRandomInt(3, 99);
       }
       setCurNum2(dop2);
-    } else if (props.dificult == 2) {
+    } else if (difficulty == 2) {
       setCurNum1(getRandomInt(3, 300));
       let dop2 = getRandomInt(11, 199);
       while (dop2 % 10 == 0) {
@@ -64,23 +55,21 @@ const Game = (props, route) => {
   }
 
   function multiplication() {
-    if (props.dificult == 0) {
+    if (difficulty == 0) {
       setCurNum1(getRandomInt(1, 10));
       setCurNum2(getRandomInt(1, 10));
-    } else if (props.dificult == 1) {
+    } else if (difficulty == 1) {
       let dop1 = getRandomInt(1, 19);
       let dop2 = getRandomInt(1, 19);
-
       let zero = getRandomInt(0, 2);
       dop1 *= Math.pow(10, zero);
       zero = getRandomInt(0, 2);
       dop2 *= Math.pow(10, zero);
       setCurNum1(dop1);
       setCurNum2(dop2);
-    } else if (props.dificult == 2) {
+    } else if (difficulty == 2) {
       let dop1 = getRandomInt(3, 300);
       let dop2 = getRandomInt(11, 199);
-
       let zero = getRandomInt(0, 5);
       dop1 *= Math.pow(10, zero);
       zero = getRandomInt(0, 5);
@@ -92,26 +81,24 @@ const Game = (props, route) => {
   }
 
   function division() {
-    if (props.dificult == 0) {
+    if (difficulty == 0) {
       let dop1 = getRandomInt(1, 10);
       let rez = getRandomInt(1, 10);
       setCurNum2(dop1);
       setCurNum1(dop1 * rez);
-    } else if (props.dificult == 1) {
+    } else if (difficulty == 1) {
       let dop1 = getRandomInt(1, 10);
       let rez = getRandomInt(1, 10);
       let zero = getRandomInt(0, 1);
-
       dop1 *= Math.pow(10, zero);
       zero = getRandomInt(0, 1);
       rez *= Math.pow(10, zero);
       setCurNum2(dop1);
       setCurNum1(dop1 * rez);
-    } else if (props.dificult == 2) {
+    } else if (difficulty == 2) {
       let dop1 = getRandomInt(1, 10);
       let rez = getRandomInt(1, 10);
       let zero = getRandomInt(0, 1);
-
       dop1 *= Math.pow(10, zero);
       zero = getRandomInt(3, 9);
       rez *= Math.pow(10, zero);
@@ -123,20 +110,18 @@ const Game = (props, route) => {
 
   function percent() {
     const percents = [10, 20, 30, 40, 50, 60, 70, 80, 90, 25, 75];
-    if (props.dificult == 0) {
+    if (difficulty == 0) {
       setCurNum1(getRandomInt(1, 9) * 10);
       setCurNum2(getRandomInt(1, 10) * 10);
-    } else if (props.dificult == 1) {
+    } else if (difficulty == 1) {
       let zero = getRandomInt(2, 5);
       let dop2 = getRandomInt(1, 9) * Math.pow(10, zero);
-
       let dop1 = getRandomInt(0, 10);
       setCurNum1(percents[dop1]);
       setCurNum2(dop2);
-    } else if (props.dificult == 2) {
+    } else if (difficulty == 2) {
       let zero = getRandomInt(2, 9);
       let dop2 = getRandomInt(1, 9) * Math.pow(10, zero);
-
       let dop1 = getRandomInt(0, 10);
       setCurNum1(percents[dop1]);
       setCurNum2(dop2);
@@ -159,84 +144,76 @@ const Game = (props, route) => {
     }
   }
 
-  function updateQuestion(type) {
-    if (props.type == 0) {
+  function updateQuestion(updateType) {
+    if (type == 0) {
       addition();
-    } else if (props.type == 1) {
+    } else if (type == 1) {
       subtraction();
-    } else if (props.type == 2) {
+    } else if (type == 2) {
       multiplication();
-    } else if (props.type == 3) {
+    } else if (type == 3) {
       division();
-    } else if (props.type == 4) {
+    } else if (type == 4) {
       percent();
-    } else if (props.type == 5) {
+    } else if (type == 5) {
       random();
     }
     if (!curAnswer) {
       setCurAnswer("");
     }
-    if (type == 1) {
-      var Object = {
+    if (updateType == 1) {
+      const object = {
         num1: curNum1,
         arif: curArif,
         num2: curNum2,
         expect: curExpect,
         answer: curAnswer,
       };
-      props.setData((prev) => [...prev, Object]);
+      setData((prev) => [...prev, object]);
     }
   }
 
   useEffect(() => {
     updateQuestion(0);
-  }, [route]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setView1(curNum1);
-    if (curNum1 >= 1000 && curNum1 <= 999999 && curNum1 % 100 == 0) {
+    if (curNum1 >= 1000 && curNum1 <= 999999 && curNum1 % 100 === 0) {
       setView1(curNum1 / 1000 + " thousand");
     }
-    if (curNum1 >= 1000000 && curNum1 <= 999999999 && curNum1 % 1000 == 0) {
+    if (curNum1 >= 1000000 && curNum1 <= 999999999 && curNum1 % 1000 === 0) {
       setView1(curNum1 / 1000000 + " million");
     }
-    if (
-      curNum1 >= 1000000000 &&
-      curNum1 <= 999999999999 &&
-      curNum1 % 1000000 == 0
-    ) {
+    if (curNum1 >= 1000000000 && curNum1 <= 999999999999 && curNum1 % 1000000 === 0) {
       setView1(curNum1 / 1000000000 + " billion");
     }
-    //setView1(curNum1.toLocaleString());
   }, [curNum1]);
+
   useEffect(() => {
     setView2(curNum2);
-    if (curNum2 >= 1000 && curNum1 <= 999999 && curNum2 % 100 == 0) {
+    if (curNum2 >= 1000 && curNum2 <= 999999 && curNum2 % 100 === 0) {
       setView2(curNum2 / 1000 + " thousand");
     }
-    if (curNum2 >= 1000000 && curNum1 <= 999999999 && curNum2 % 10000 == 0) {
+    if (curNum2 >= 1000000 && curNum2 <= 999999999 && curNum2 % 10000 === 0) {
       setView2(curNum2 / 1000000 + " million");
     }
-    if (
-      curNum2 >= 1000000000 &&
-      curNum1 <= 999999999999 &&
-      curNum2 % 10000000 == 0
-    ) {
+    if (curNum2 >= 1000000000 && curNum2 <= 999999999999 && curNum2 % 10000000 === 0) {
       setView2(curNum2 / 1000000000 + " billion");
     }
-    //setView2(curNum2.toLocaleString());
   }, [curNum2]);
 
   useEffect(() => {
-    if (props.type == 0) {
+    if (type == 0) {
       setCurExpect(curNum1 + curNum2);
-    } else if (props.type == 1) {
+    } else if (type == 1) {
       setCurExpect(curNum1 - curNum2);
-    } else if (props.type == 2) {
+    } else if (type == 2) {
       setCurExpect(curNum1 * curNum2);
-    } else if (props.type == 3) {
+    } else if (type == 3) {
       setCurExpect(curNum1 / curNum2);
-    } else if (props.type == 4) {
+    } else if (type == 4) {
       setCurExpect((curNum1 / 100) * curNum2);
     } else {
       if (curArif == "  +  ") {
@@ -251,7 +228,7 @@ const Game = (props, route) => {
         setCurExpect((curNum1 / 100) * curNum2);
       }
     }
-  }, [curNum2]);
+  }, [curNum2, type, curArif, curNum1]);
 
   return (
     <View style={styles.Game}>
@@ -281,8 +258,8 @@ const Game = (props, route) => {
       <TouchableOpacity
         style={styles.button_exit}
         onPress={() => {
-          props.setTimer(0);
-          props.setNon(1);
+          setTimer(0);
+          setNon(1);
         }}
       >
         <Text style={styles.button_text_ex}>
@@ -292,66 +269,5 @@ const Game = (props, route) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  Game: {
-    flex: 1,
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: 20,
-    paddingRight: 20,
-    backgroundColor: "#ccc",
-  },
-  question: {
-    //margin: 10,
-    width: 300,
-    padding: 20,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    borderRadius: 5,
-    backgroundColor: "#fff",
-  },
-  question_element: {
-    //padding: 5,
-    fontSize: 20,
-  },
-  input: {
-    marginTop: 20,
-    padding: 15,
-    width: 300,
-    fontSize: 20,
-    alignItems: "center",
-    borderRadius: 5,
-    backgroundColor: "#fff",
-  },
-  button: {
-    margin: 20,
-    padding: 15,
-    width: 300,
-    alignItems: "center",
-    borderRadius: 5,
-    backgroundColor: "#223764",
-    color: "#fff",
-  },
-  button_exit: {
-    margin: 30,
-    padding: 10,
-    width: 250,
-    alignItems: "center",
-    borderRadius: 5,
-    backgroundColor: "#86bfe8",
-  },
-  button_text: {
-    fontSize: 18,
-    color: "#fff",
-    textAlign: "center",
-  },
-  button_text_ex: {
-    fontSize: 18,
-    color: "#fff",
-    textAlign: "center",
-    color: "black",
-  },
-});
 
-export default Game;
+export default GamePrecise;
