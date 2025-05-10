@@ -1,0 +1,2 @@
+# ConsultingMath
+ App for economists
