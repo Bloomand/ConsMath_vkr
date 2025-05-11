@@ -5,7 +5,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState, useMemo } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import GameContext from "../../../components/GameContext.js";
+import GameContext from "../../../components/GameContext/GameContext.js";
 import { useUserInfo } from "../../../hooks/useUserInfo.js";
 import { useSetUserInfo } from "../../../hooks/useSetUserInfo.js";
 import { useTotalRankInfo } from "../../../hooks/useTotalRankInfo.js";
