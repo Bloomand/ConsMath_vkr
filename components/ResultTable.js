@@ -107,9 +107,6 @@ const ResultTable = ({
 
       {/* Строки таблицы со статистикой */}
       {stats.map((stat) => renderTableRow(stat.label, stat.key))}
-
-      {/* А здесь уже выводим наш новый компонент с подробными ответами */}
-      <AnswerList data={data} styles={styles} />
     </View>
   );
 };
