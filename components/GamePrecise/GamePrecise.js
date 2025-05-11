@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { styles } from "./GamePrecise.styles";
 
-const GamePrecise = ({ difficulty, type, setData, setTimer, setNon }) => {
+const GamePrecise = ({ difficulty, type, setData, setTimer, setShouldSave }) => {
   const [curNum1, setCurNum1] = useState(14344);
   const [curArif, setCurArif] = useState("+");
   const [curNum2, setCurNum2] = useState(56344);
@@ -259,7 +259,7 @@ const GamePrecise = ({ difficulty, type, setData, setTimer, setNon }) => {
         style={styles.button_exit}
         onPress={() => {
           setTimer(0);
-          setNon(1);
+          setShouldSave(1);
         }}
       >
         <Text style={styles.button_text_ex}>

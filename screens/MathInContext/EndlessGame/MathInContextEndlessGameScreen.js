@@ -17,7 +17,7 @@ const MathInContextEndlessGameScreen = ({ navigation, route }) => {
   const [timerCount, setTimer] = useState();
   const [Component, setComponent] = useState();
   const [data, setData] = useState([]);
-  const [nonElem, setNon] = useState(0);
+  const [shouldSave, setShouldSave] = useState(0);
 
   const { userInfo, setUserInfo } = useUserInfo();
   const scoreData = useMemo(() => userInfo[TYPE][SUBTYPE], [userInfo]);
@@ -29,7 +29,7 @@ const MathInContextEndlessGameScreen = ({ navigation, route }) => {
     setUserInfo,
     type: TYPE,
     subType: SUBTYPE,
-    shouldSave: nonElem,
+    shouldSave: shouldSave,
   });
 
   const { mean, twentyPercentMean } = useTotalRankInfo(TYPE, SUBTYPE);
@@ -43,11 +43,14 @@ const MathInContextEndlessGameScreen = ({ navigation, route }) => {
   }, [route]);
 
   useEffect(() => {
-    if (nonElem == 0) {
+    if (shouldSave == 0) {
       setComponent(
         <View style={styles.EndlessGame}>
           <Text></Text>
-          <GameContext setData={setData} setNon={setNon} setTimer={setTimer} />
+          <GameContext
+            setData={setData}
+            setShouldSave={setShouldSave}
+            setTimer={setTimer} />
         </View>
       );
     } else {
@@ -62,11 +65,11 @@ const MathInContextEndlessGameScreen = ({ navigation, route }) => {
             styles={styles}
             trainingType="Endless"
           />
-          <ScrollView><AnswerList data={data} styles={styles} type="MathInContext"/></ScrollView>
+          <ScrollView><AnswerList data={data} styles={styles} type="MathInContext" /></ScrollView>
         </View>
       );
     }
-  }, [nonElem, scoreData]);
+  }, [shouldSave, scoreData]);
 
   return <View style={styles.EndlessGame}>{Component}</View>;
 };

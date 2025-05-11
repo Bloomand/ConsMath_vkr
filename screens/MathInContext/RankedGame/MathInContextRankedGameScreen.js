@@ -91,7 +91,7 @@ const MathInContextRankedGameScreen = ({ navigation, route }) => {
           difficulty={route.params.difficulty}
           type={route.params.type}
           setData={setData}
-          setNon={setShouldSave}
+          setShouldSave={setShouldSave}
           setTimer={setTimer}
         />
       </View>

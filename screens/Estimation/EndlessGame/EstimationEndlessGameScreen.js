@@ -17,7 +17,7 @@ const EstimationEndlessGameScreen = ({ navigation, route }) => {
   const [timerCount, setTimer] = useState();
   const [Component, setComponent] = useState();
   const [data, setData] = useState([]);
-  const [nonElem, setNon] = useState(0);
+  const [shouldSave, setShouldSave] = useState(0);
 
   const { userInfo, setUserInfo } = useUserInfo();
   const scoreData = useMemo(() => userInfo[TYPE][SUBTYPE], [userInfo]);
@@ -29,7 +29,7 @@ const EstimationEndlessGameScreen = ({ navigation, route }) => {
     setUserInfo,
     type: TYPE,
     subType: SUBTYPE,
-    shouldSave: nonElem,
+    shouldSave: shouldSave,
   });
 
   const { mean, twentyPercentMean } = useTotalRankInfo(TYPE, SUBTYPE);
@@ -55,14 +55,14 @@ const EstimationEndlessGameScreen = ({ navigation, route }) => {
           difficulty={route.params.difficulty}
           type={route.params.type}
           setData={setData}
-          setNon={setNon}
+          setShouldSave={setShouldSave}
         />
       </View>
     );
   }, [navigation]);
 
   useEffect(() => {
-    if (nonElem == 0) {
+    if (shouldSave == 0) {
       setComponent(
         <View style={styles.EndlessGame}>
           <Text></Text>
@@ -70,7 +70,7 @@ const EstimationEndlessGameScreen = ({ navigation, route }) => {
             difficulty={route.params.difficulty}
             type={route.params.type}
             setData={setData}
-            setNon={setNon}
+            setShouldSave={setShouldSave}
             setTimer={setTimer}
           />
         </View>
@@ -91,7 +91,7 @@ const EstimationEndlessGameScreen = ({ navigation, route }) => {
         </View>
       );
     }
-  }, [nonElem, scoreData]);
+  }, [shouldSave, scoreData]);
 
   return <View style={styles.EndlessGame}>{Component}</View>;
 };

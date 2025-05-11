@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text } from "react-native";
-import AnswerList from "./AnswerList"; // <-- Импортируем новый компонент
 
 function parseValue(val) {
   if (val === null || val === undefined) return null;

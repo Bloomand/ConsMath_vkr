@@ -274,7 +274,7 @@ const GameContext = (props, route) => {
       <TouchableOpacity style={styles.button_exit}
         onPress={() => {
           props.setTimer(0);
-          props.setNon(1);
+          props.setShouldSave(1);
 
         }}>
         <Text style={styles.button_text}>If you want to finish game earlier - push me!</Text>
