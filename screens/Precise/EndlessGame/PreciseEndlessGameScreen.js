@@ -68,7 +68,7 @@ const PreciseEndlessGameScreen = ({ navigation, route }) => {
             styles={styles}
             trainingType="Endless"
           />
-          <ScrollView><AnswerList data={data} styles={styles} /></ScrollView>
+          <ScrollView><AnswerList data={data} styles={styles} type="Precise" /></ScrollView>
         </View>
       );
     }

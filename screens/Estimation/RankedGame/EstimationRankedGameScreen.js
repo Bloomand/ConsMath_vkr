@@ -110,7 +110,7 @@ const EstimationRankedGameScreen = ({ navigation, route }) => {
           styles={styles}
           trainingType="Timed"
         />
-        <ScrollView><AnswerList data={data} styles={styles} /></ScrollView>
+        <ScrollView><AnswerList data={data} styles={styles} type="Estimation"/></ScrollView>
       </View>
     );
   }, [shouldSave, scoreData]);

@@ -105,7 +105,7 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
           styles={styles}
           trainingType="Timed"
         />
-        <ScrollView><AnswerList data={data} styles={styles} /></ScrollView>
+        <ScrollView><AnswerList data={data} styles={styles} type="Precise"/></ScrollView>
       </View>
     );
   }, [shouldSave, scoreData]);

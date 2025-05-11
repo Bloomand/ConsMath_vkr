@@ -18,9 +18,10 @@ function parseValue(val) {
   return null;
 }
 
-export default function AnswerList({ data, styles }) {
+export default function AnswerList({ data, styles, type }) {
   const listAnswers = data.map((element, index) => {
-    const { num1, num2, arif, answer, expect } = element;
+    // Деструктурируем общие поля
+    const { num1, num2, arif, answer, expect, quest } = element;
 
     // Парсим строку ответа и ожидаемое значение в числа
     const parsedAnswer = parseValue(answer);
@@ -31,11 +32,23 @@ export default function AnswerList({ data, styles }) {
     const percentError = isCorrect ? 0 : 100;
     const backgroundColor = isCorrect ? "#bfdbc5" : "#dbc0c5";
 
+    // Рендерим вопрос в зависимости от типа
+    const questionContent = type === "MathInContext" ? (
+      <Text>{quest}</Text>
+    ) : (
+      <Text>
+        {num1?.toLocaleString()} {arif} {num2?.toLocaleString()}
+      </Text>
+    );
+
+
     // Текст ответа
     const answerText =
       !answer || answer.trim() === ""
         ? "No answer was provided."
         : `Your answer is ${answer}`;
+
+
 
     return (
       <View key={index} style={[styles.item, { backgroundColor }]}>
@@ -43,9 +56,7 @@ export default function AnswerList({ data, styles }) {
           <Text>#{index + 1}</Text>
         </View>
         <View>
-          <Text>
-            {num1.toLocaleString()} {arif} {num2.toLocaleString()}
-          </Text>
+          {questionContent}
           <Text>= {expect.toLocaleString()}</Text>
           <Text style={styles.text_bold}>{answerText}</Text>
           <Text style={styles.text_bold}>Error is {percentError}%</Text>
