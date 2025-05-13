@@ -11,7 +11,6 @@ import { login } from "../../../src/firebaseApi/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./LoginScreen.styles";
 
-
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -95,4 +94,3 @@ const LoginScreen = ({ navigation }) => {
 };
 
 export default LoginScreen;
-

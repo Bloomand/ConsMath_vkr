@@ -86,7 +86,7 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
           difficulty={route.params.difficulty}
           type={route.params.type}
           setData={setData}
-          setNon={setShouldSave}
+          setShouldSave={setShouldSave}
           setTimer={setTimer}
         />
       </View>
@@ -103,9 +103,9 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
           twentyPercentMean={twentyPercentMean}
           time={time}
           styles={styles}
-          trainingType="Timed" 
+          trainingType="Timed"
         />
-        <ScrollView><AnswerList data={data} styles={styles} /></ScrollView>
+        <ScrollView><AnswerList data={data} styles={styles} type="Precise"/></ScrollView>
       </View>
     );
   }, [shouldSave, scoreData]);

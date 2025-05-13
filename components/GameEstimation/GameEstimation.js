@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import {
   Text,
   View,
-  Button,
   TouchableOpacity,
   TextInput,
 } from "react-native";
@@ -223,7 +222,7 @@ const GameEstimation = (props, route) => {
         style={styles.button_exit}
         onPress={() => {
           props.setTimer(0);
-          props.setNon(1);
+          props.setShouldSave(1);
         }}
       >
         <Text style={styles.button_text}>

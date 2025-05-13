@@ -11,8 +11,6 @@ import { signup } from "../../../src/firebaseApi/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./RegistrationScreen.styles";
 
-import { styles } from "./RegistrationScreen.styles"
-
 const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -93,4 +91,3 @@ const RegistrationScreen = ({ navigation }) => {
 };
 
 export default RegistrationScreen;
-
