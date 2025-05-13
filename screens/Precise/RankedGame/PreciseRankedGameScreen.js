@@ -76,6 +76,7 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
       setShouldSave(1);
       return;
     }
+
     setComponent(
       <View style={styles.RankedGame}>
         <View style={styles.timer}>
