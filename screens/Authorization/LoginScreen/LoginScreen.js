@@ -10,15 +10,24 @@ import { useFocusEffect } from "@react-navigation/native";
 import { login } from "../../../src/firebaseApi/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./LoginScreen.styles";
+import { validateLoginForm } from "../../../utils/helpers/validationFunctions";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   const logIn = useCallback(async () => {
     setError(false);
+    const validation = validateLoginForm(email, password);
+    setFormErrors(validation.errors);
+    
+    if (!validation.isValid) {
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -50,14 +59,19 @@ const LoginScreen = ({ navigation }) => {
     <View style={styles.Reg}>
       <TextInput
         editable
-        placeholder="Login"
+        placeholder="Email"
         textAlign="center"
         keyboardType="email-address"
         autoCapitalize="none"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(text) => {
+          setEmail(text);
+          setFormErrors({...formErrors, email: ""});
+        }}
         style={styles.input}
       />
+      {formErrors.email && <Text style={styles.errorText}>{formErrors.email}</Text>}
+
       <TextInput
         editable
         placeholder="Password"
@@ -65,9 +79,13 @@ const LoginScreen = ({ navigation }) => {
         secureTextEntry
         autoCapitalize="none"
         value={password}
-        onChangeText={setPassword}
+        onChangeText={(text) => {
+          setPassword(text);
+          setFormErrors({...formErrors, password: ""});
+        }}
         style={styles.input}
       />
+      {formErrors.password && <Text style={styles.errorText}>{formErrors.password}</Text>}
       
       {isLoading ? (
         <ActivityIndicator size="large" color="#4CAF50" />
@@ -85,7 +103,7 @@ const LoginScreen = ({ navigation }) => {
       </TouchableOpacity>
 
       {error && (
-        <Text style={{ color: "red", textAlign: "center", marginTop: 10 }}>
+        <Text style={styles.errorText}>
           Invalid login or password
         </Text>
       )}
