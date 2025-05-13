@@ -34,7 +34,7 @@ export default function AnswerList({ data, styles, type }) {
 
     // Рендерим вопрос в зависимости от типа
     const questionContent = type === "MathInContext" ? (
-      <Text>{quest}</Text>
+      <Text style={{ width: 240 }}>{quest}</Text>
     ) : (
       <Text>
         {num1?.toLocaleString()} {arif} {num2?.toLocaleString()}
