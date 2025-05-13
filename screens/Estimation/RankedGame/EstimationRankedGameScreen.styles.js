@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#ccc",
   },
   timer: {
-    //marginTop: 5,
     padding: 5,
     width: 300,
     alignItems: "center",
@@ -36,7 +35,7 @@ export const styles = StyleSheet.create({
   },
   item: {
     marginTop: 10,
-    width: 300,
+    width: '100%',
     borderBottomLeftRadius: 10,
     borderTopLeftRadius: 10,
     flexDirection: "row",

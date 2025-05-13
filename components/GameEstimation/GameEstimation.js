@@ -2,15 +2,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import {
-  StyleSheet,
   Text,
   View,
-  Button,
   TouchableOpacity,
   TextInput,
 } from "react-native";
-
-const GameEst = (props, route) => {
+import { styles } from "./GameEstimation.styles";
+const GameEstimation = (props, route) => {
   const [curNum1, setCurNum1] = useState(14344);
 
   const [curArif, setCurArif] = useState("+");
@@ -28,10 +26,10 @@ const GameEst = (props, route) => {
   }
 
   function addition() {
-    if (props.dificult == 1) {
+    if (props.difficulty == 1) {
       setCurNum1(getRandomInt(100, 999999));
       setCurNum2(getRandomInt(100, 999999));
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       setCurNum1(getRandomInt(10000, 999999999));
       setCurNum2(getRandomInt(10000, 999999999));
     }
@@ -39,10 +37,10 @@ const GameEst = (props, route) => {
   }
 
   function subtraction() {
-    if (props.dificult == 1) {
+    if (props.difficulty == 1) {
       setCurNum1(getRandomInt(100, 999999));
       setCurNum2(getRandomInt(100, 99999));
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       setCurNum1(getRandomInt(10000, 9999999999));
       setCurNum2(getRandomInt(10000, 999999999));
     }
@@ -50,10 +48,10 @@ const GameEst = (props, route) => {
   }
 
   function multiplication() {
-    if (props.dificult == 1) {
+    if (props.difficulty == 1) {
       setCurNum1(getRandomInt(10, 9999));
       setCurNum2(getRandomInt(100, 9999));
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       setCurNum1(getRandomInt(100, 999999999));
       setCurNum2(getRandomInt(100, 999999999));
     }
@@ -61,10 +59,10 @@ const GameEst = (props, route) => {
   }
 
   function division() {
-    if (props.dificult == 1) {
+    if (props.difficulty == 1) {
       setCurNum1(getRandomInt(10, 9999999));
       setCurNum2(getRandomInt(1, 9999));
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       setCurNum1(getRandomInt(10000000, 99999999999));
       setCurNum2(getRandomInt(100, 9999999));
     }
@@ -73,13 +71,13 @@ const GameEst = (props, route) => {
 
   function percent() {
     const percents = [10, 20, 30, 40, 50, 60, 70, 80, 90, 25, 75];
-    if (props.dificult == 1) {
+    if (props.difficulty == 1) {
       let dop1 = getRandomInt(0, 10);
       let zero = getRandomInt(3, 9);
       let dop2 = getRandomInt(1, 999) * Math.pow(10, zero);
       setCurNum1(percents[dop1]);
       setCurNum2(dop2);
-    } else if (props.dificult == 2) {
+    } else if (props.difficulty == 2) {
       let dop1 = getRandomInt(0, 10);
       setCurNum1(percents[dop1]);
       setCurNum2(getRandomInt(1000, 999999999));
@@ -167,7 +165,6 @@ const GameEst = (props, route) => {
     ) {
       setView2(curNum2 / 1000000000 + " billion");
     }
-    //setView2(curNum2.toLocaleString());
   }, [curNum2]);
 
   useEffect(() => {
@@ -225,7 +222,7 @@ const GameEst = (props, route) => {
         style={styles.button_exit}
         onPress={() => {
           props.setTimer(0);
-          props.setNon(1);
+          props.setShouldSave(1);
         }}
       >
         <Text style={styles.button_text}>
@@ -235,66 +232,5 @@ const GameEst = (props, route) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  Game: {
-    flex: 1,
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: 20,
-    paddingRight: 20,
-    backgroundColor: "#ccc",
-  },
-  question: {
-    //margin: 10,
-    width: 300,
-    padding: 20,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    borderRadius: 5,
-    backgroundColor: "#fff",
-  },
-  question_element: {
-    //padding: 5,
-    fontSize: 20,
-  },
-  input: {
-    marginTop: 20,
-    padding: 15,
-    width: 300,
-    fontSize: 20,
-    alignItems: "center",
-    borderRadius: 5,
-    backgroundColor: "#fff",
-  },
-  button: {
-    margin: 20,
-    padding: 15,
-    width: 300,
-    alignItems: "center",
-    borderRadius: 5,
-    backgroundColor: "#223764",
-    color: "#fff",
-  },
-  button_exit: {
-    margin: 30,
-    padding: 10,
-    width: 250,
-    alignItems: "center",
-    borderRadius: 5,
-    backgroundColor: "#86bfe8",
-  },
-  button_text: {
-    fontSize: 18,
-    color: "#fff",
-    textAlign: "center",
-  },
-  button_text_ex: {
-    fontSize: 18,
-    color: "#fff",
-    textAlign: "center",
-    color: "black",
-  },
-});
 
-export default GameEst;
+export default GameEstimation;

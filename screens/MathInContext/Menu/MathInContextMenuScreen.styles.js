@@ -38,16 +38,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 5
   },
-  image: {
-    margin: width * 0.03,
-    width: width * 0.22,
-    height: width * 0.2
-  },
-  image_text: {
-    width: width * 0.3,
-    fontSize: width * 0.045,
-    textAlign: 'center'
-  },
   element3: {
     flexDirection: 'row',
     justifyContent: 'center',

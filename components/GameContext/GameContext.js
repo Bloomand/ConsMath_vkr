@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useEffect } from 'react'
 
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity, TextInput } from 'react-native';
 
-import dataContext from '../src/DataContext';
-
+import dataContext from '../../src/DataContext';
+import { styles } from './GameContext.styles';
 
 const GameContext = (props, route) => {
   const [curQuest, setCurQuest] = useState(0);
@@ -12,8 +12,6 @@ const GameContext = (props, route) => {
   const [curExpect, setCurExpect] = useState();
   const [curAnswer, setCurAnswer] = useState();
   const [curMass, setCurMass] = useState();
-
-
 
   function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -276,7 +274,7 @@ const GameContext = (props, route) => {
       <TouchableOpacity style={styles.button_exit}
         onPress={() => {
           props.setTimer(0);
-          props.setNon(1);
+          props.setShouldSave(1);
 
         }}>
         <Text style={styles.button_text}>If you want to finish game earlier - push me!</Text>
@@ -284,67 +282,5 @@ const GameContext = (props, route) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  Game: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: 20,
-    paddingRight: 20,
-    backgroundColor: '#ccc'
-  },
-  question: {
-    //margin: 10,
-    width: 300,
-    padding: 20,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    borderRadius: 5,
-    backgroundColor: '#fff'
-  },
-  question_element: {
-    padding: 5,
-  },
-  input: {
-    marginTop: 20,
-    padding: 15,
-    width: 300,
-    fontSize: 20,
-    alignItems: 'center',
-    borderRadius: 5,
-    backgroundColor: '#fff'
-  },
-  button: {
-    margin: 20,
-    padding: 15,
-    width: 300,
-    alignItems: 'center',
-    borderRadius: 5,
-    backgroundColor: '#223764',
-    color: '#fff',
-  },
-  button_exit: {
-    margin: 30,
-    padding: 10,
-    width: 250,
-    alignItems: 'center',
-    borderRadius: 5,
-    backgroundColor: '#86bfe8',
-  },
-  button_text: {
-    fontSize: 18,
-    color: '#fff',
-    textAlign: 'center',
-  },
-  button_text_ex: {
-    fontSize: 18,
-    color: '#fff',
-    textAlign: 'center',
-    color: 'black',
-  }
-}
-);
 
 export default GameContext

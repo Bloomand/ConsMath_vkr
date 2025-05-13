@@ -1,28 +1,21 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import {
   Text,
   View,
-  Button,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { login } from "../../../src/firebaseApi/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-<<<<<<< Updated upstream
-import { styles } from "./LoginScreen.styles"
-=======
 import { styles } from "./LoginScreen.styles";
 import { validateLoginForm } from "../../../utils/helpers/validationFunctions";
->>>>>>> Stashed changes
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-<<<<<<< Updated upstream
-
-  const logIn = useCallback(async () => {
-=======
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
@@ -37,29 +30,30 @@ const LoginScreen = ({ navigation }) => {
 
     setIsLoading(true);
 
->>>>>>> Stashed changes
     try {
       const { data } = await login(email, password);
-      setError(false);
       await AsyncStorage.setItem("user-id", data.localId);
       navigation.navigate("Home");
     } catch (error) {
-      console.log("Error", error.message);
+      console.warn("Login Error:", error.message);
       setError(true);
+    } finally {
+      setIsLoading(false);
     }
-  }, [email, password]);
+  }, [email, password, navigation]);
 
-  const redirect = useCallback(async () => {
-    const userId = await AsyncStorage.getItem("user-id");
-
-    if (!userId) return;
-    navigation.navigate("Home");
-  }, []);
-
-  useEffect(() => {
-    redirect();
-  }, [redirect, navigation]);
-
+  useFocusEffect(
+    useCallback(() => {
+      const checkUser = async () => {
+        const userId = await AsyncStorage.getItem("user-id");
+        if (userId) {
+          navigation.navigate("Home");
+          return null;
+        }
+      };
+      checkUser();
+    }, [navigation])
+  );
 
   return (
     <View style={styles.Reg}>
@@ -67,15 +61,13 @@ const LoginScreen = ({ navigation }) => {
         editable
         placeholder="Email"
         textAlign="center"
+        keyboardType="email-address"
+        autoCapitalize="none"
         value={email}
-<<<<<<< Updated upstream
-        onChangeText={(text) => setEmail(text)}
-=======
         onChangeText={(text) => {
           setEmail(text);
           setFormErrors({...formErrors, email: ""});
         }}
->>>>>>> Stashed changes
         style={styles.input}
       />
       {formErrors.email && <Text style={styles.errorText}>{formErrors.email}</Text>}
@@ -84,20 +76,9 @@ const LoginScreen = ({ navigation }) => {
         editable
         placeholder="Password"
         textAlign="center"
+        secureTextEntry
+        autoCapitalize="none"
         value={password}
-<<<<<<< Updated upstream
-        onChangeText={(text) => setPassword(text)}
-        style={styles.input}
-      />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          logIn(email, password);
-        }}
-      >
-        <Text style={styles.button_text}>Login!</Text>
-      </TouchableOpacity>
-=======
         onChangeText={(text) => {
           setPassword(text);
           setFormErrors({...formErrors, password: ""});
@@ -114,22 +95,15 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       )}
       
->>>>>>> Stashed changes
       <TouchableOpacity
         style={styles.button_link}
-        onPress={() => {
-          navigation.navigate("Registration");
-        }}
+        onPress={() => navigation.navigate("Registration")}
       >
-        <Text style={styles.button_link}>Registration</Text>
+        <Text style={styles.button_text}>Registration</Text>
       </TouchableOpacity>
 
       {error && (
-<<<<<<< Updated upstream
-        <Text style={{ color: "red", textAlign: "center" }}>
-=======
         <Text style={styles.errorText}>
->>>>>>> Stashed changes
           Invalid login or password
         </Text>
       )}

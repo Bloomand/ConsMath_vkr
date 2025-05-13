@@ -1,29 +1,21 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   Text,
   View,
-  Button,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { signup } from "../../../src/firebaseApi/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-<<<<<<< Updated upstream
-
-import { styles } from "./RegistrationScreen.styles"
-=======
 import { styles } from "./RegistrationScreen.styles";
 import { validateRegistrationForm } from "../../../utils/helpers/validationFunctions";
->>>>>>> Stashed changes
 
 const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-<<<<<<< Updated upstream
-
-  const signUp = useCallback(async () => {
-=======
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
@@ -38,32 +30,30 @@ const RegistrationScreen = ({ navigation }) => {
 
     setIsLoading(true);
 
->>>>>>> Stashed changes
     try {
       const { data } = await signup(email, password);
-
-      setError(false);
-
       await AsyncStorage.setItem("user-id", data.localId);
-
       navigation.navigate("Home");
     } catch (error) {
-      console.log("Error", error.message);
+      console.warn("Registration Error:", error.message);
       setError(true);
+    } finally {
+      setIsLoading(false);
     }
-  }, [email, password]);
+  }, [email, password, navigation]);
 
-  const redirect = useCallback(async () => {
-    const userId = await AsyncStorage.getItem("user-id");
-
-    if (!userId) return;
-    navigation.navigate("Home");
-  }, []);
-
-  useEffect(() => {
-    redirect();
-  }, [redirect, navigation]);
-
+  useFocusEffect(
+    useCallback(() => {
+      const checkUser = async () => {
+        const userId = await AsyncStorage.getItem("user-id");
+        if (userId) {
+          navigation.navigate("Home");
+          return null;
+        }
+      };
+      checkUser();
+    }, [navigation])
+  );
 
   return (
     <View style={styles.Reg}>
@@ -71,15 +61,13 @@ const RegistrationScreen = ({ navigation }) => {
         editable
         placeholder="Email"
         textAlign="center"
+        keyboardType="email-address"
+        autoCapitalize="none"
         value={email}
-<<<<<<< Updated upstream
-        onChangeText={(text) => setEmail(text)}
-=======
         onChangeText={(text) => {
           setEmail(text);
           setFormErrors({...formErrors, email: ""});
         }}
->>>>>>> Stashed changes
         style={styles.input}
       />
       {formErrors.email && <Text style={styles.errorText}>{formErrors.email}</Text>}
@@ -88,25 +76,9 @@ const RegistrationScreen = ({ navigation }) => {
         editable
         placeholder="Password"
         textAlign="center"
+        secureTextEntry
+        autoCapitalize="none"
         value={password}
-<<<<<<< Updated upstream
-        onChangeText={(text) => setPassword(text)}
-        style={styles.input}
-      />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          signUp(email, password);
-        }}
-      >
-        <Text style={styles.button_text}>Registrate</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Login");
-        }}
-      >
-=======
         onChangeText={(text) => {
           setPassword(text);
           setFormErrors({...formErrors, password: ""});
@@ -124,18 +96,12 @@ const RegistrationScreen = ({ navigation }) => {
       )}
 
       <TouchableOpacity onPress={() => navigation.navigate("Login")}>
->>>>>>> Stashed changes
         <Text style={styles.button_link}>Login</Text>
       </TouchableOpacity>
 
       {error && (
-<<<<<<< Updated upstream
-        <Text style={{ color: "red", textAlign: "center" }}>
-          User already exists
-=======
         <Text style={styles.errorText}>
           User already exists or registration failed
->>>>>>> Stashed changes
         </Text>
       )}
     </View>
