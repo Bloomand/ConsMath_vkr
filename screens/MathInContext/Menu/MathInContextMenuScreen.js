@@ -42,4 +42,3 @@ const MathInContextMenuScreen = ({ navigation }) => {
 };
 
 export default MathInContextMenuScreen;
-
