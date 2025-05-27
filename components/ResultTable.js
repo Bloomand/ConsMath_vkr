@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 
+
 function parseValue(val) {
   if (val === null || val === undefined) return null;
   if (typeof val === "number") return val;
@@ -26,7 +27,8 @@ const ResultTable = ({
   twentyPercentMean,
   time,
   styles,
-  trainingType
+  trainingType,
+
 }) => {
   const isEndless = trainingType === "Endless";
 
@@ -60,15 +62,19 @@ const ResultTable = ({
     const yourResultValue = statItem ? statItem.value : "N/A";
 
     // Берём значения из scoreData, mean, twentyPercentMean
-    const yourBestResult = scoreData[key];
+    const yourBestResult = scoreData[key] || 0;
     const allUsers = mean[key];
     const top20 = twentyPercentMean[key];
 
     // Для endless-режима seconds = "N/A"
-    const displayValue = isEndless && key === "seconds" ? "N/A" : formatNumber(yourResultValue);
-    const displayBest = isEndless && key === "seconds" ? "N/A" : formatNumber(yourBestResult);
-    const displayAll = isEndless && key === "seconds" ? "N/A" : formatNumber(allUsers);
-    const displayTop20 = isEndless && key === "seconds" ? "N/A" : formatNumber(top20);
+    const displayValue =
+      isEndless && key === "seconds" ? "N/A" : formatNumber(yourResultValue);
+    const displayBest =
+      isEndless && key === "seconds" ? "N/A" : formatNumber(yourBestResult);
+    const displayAll =
+      isEndless && key === "seconds" ? "N/A" : formatNumber(allUsers);
+    const displayTop20 =
+      isEndless && key === "seconds" ? "N/A" : formatNumber(top20);
 
 
     return (
