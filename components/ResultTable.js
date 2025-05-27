@@ -1,6 +1,6 @@
-import { Text, View } from "react-native";
-
 import React from "react";
+import { View, Text } from "react-native";
+
 
 function parseValue(val) {
   if (val === null || val === undefined) return null;
@@ -28,6 +28,7 @@ const ResultTable = ({
   time,
   styles,
   trainingType,
+
 }) => {
   const isEndless = trainingType === "Endless";
 
@@ -52,11 +53,7 @@ const ResultTable = ({
     { label: "Total answers", value: totalAnswers, key: "total" },
     { label: "Right answers", value: rightAnswers, key: "right" },
     { label: "Wrong answers", value: wrongAnswers, key: "wrong" },
-    {
-      label: "Seconds per question",
-      value: secondsPerQuestion,
-      key: "seconds",
-    },
+    { label: "Seconds per question", value: secondsPerQuestion, key: "seconds" }
   ];
 
   // Рендер одной строки таблицы
@@ -78,6 +75,7 @@ const ResultTable = ({
       isEndless && key === "seconds" ? "N/A" : formatNumber(allUsers);
     const displayTop20 =
       isEndless && key === "seconds" ? "N/A" : formatNumber(top20);
+
 
     return (
       <View style={styles.table_line} key={key}>

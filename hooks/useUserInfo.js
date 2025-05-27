@@ -1,7 +1,9 @@
+
 import { DEFAULT_USER_DATA, getUserInfo } from "../src/firebaseApi/userActions";
 import { useCallback, useEffect, useState } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 export const useUserInfo = () => {
   const [userInfo, setUserInfo] = useState(DEFAULT_USER_DATA);
