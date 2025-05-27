@@ -1,22 +1,21 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Text, View, ScrollView } from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 
+import AnswerList from "../../../components/AnswerList";
 import GameContext from "../../../components/GameContext/GameContext.js";
 import ResultTable from "../../../components/ResultTable";
-import AnswerList from "../../../components/AnswerList";
-
-import { useUserInfo } from "../../../hooks/useUserInfo.js";
+import { styles } from "./MathInContextRankedGameScreen.styles.js";
 import { useSetUserInfo } from "../../../hooks/useSetUserInfo.js";
 import { useTotalRankInfo } from "../../../hooks/useTotalRankInfo.js";
-import { styles } from "./MathInContextRankedGameScreen.styles.js";
+import { useUserInfo } from "../../../hooks/useUserInfo.js";
 
 const TYPE = "context";
 const SUBTYPE = "ranked";
 
 const MathInContextRankedGameScreen = ({ navigation, route }) => {
-  const [timerCount, setTimer] = useState();
+  const [timerCount, setTimer] = useState(60);
   const [Component, setComponent] = useState();
-  const [time, setTime] = useState();
+  const [time, setTime] = useState(60);
   const [data, setData] = useState([]);
   const [shouldSave, setShouldSave] = useState();
   const [viewTimer, setViewTimer] = useState("0:00");
@@ -42,7 +41,6 @@ const MathInContextRankedGameScreen = ({ navigation, route }) => {
     setViewTimer(`${minutes}:${seconds}`);
   }, [timerCount]);
 
-
   useEffect(() => {
     setComponent(
       <View style={styles.RankedGame}>
@@ -57,7 +55,6 @@ const MathInContextRankedGameScreen = ({ navigation, route }) => {
     setTime(selectedTime);
   }, [route]);
 
-
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prev) => (prev > 0 ? prev - 1 : 0));
@@ -65,7 +62,6 @@ const MathInContextRankedGameScreen = ({ navigation, route }) => {
 
     return () => clearInterval(interval);
   }, []);
-
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -99,6 +95,7 @@ const MathInContextRankedGameScreen = ({ navigation, route }) => {
   }, [timerCount, navigation]);
 
   useEffect(() => {
+    if (!shouldSave || timerCount > 0) return;
     setComponent(
       <View>
         <ResultTable
@@ -110,7 +107,9 @@ const MathInContextRankedGameScreen = ({ navigation, route }) => {
           styles={styles}
           trainingType="Timed"
         />
-        <ScrollView><AnswerList data={data} styles={styles} type="MathInContext"/></ScrollView>
+        <ScrollView>
+          <AnswerList data={data} styles={styles} type="MathInContext" />
+        </ScrollView>
       </View>
     );
   }, [shouldSave, scoreData]);

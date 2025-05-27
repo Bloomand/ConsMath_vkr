@@ -18,18 +18,44 @@ function parseValue(val) {
   return null;
 }
 
+function calculateErrorPercentage(userAnswer, correctAnswer, gameType) {
+  if (userAnswer === null || userAnswer === undefined) {
+    return { value: 100, direction: '' };
+  }
+
+  // Для режима Precise - только 0% или 100%
+  if (gameType === "Precise") {
+    const value = userAnswer === correctAnswer ? 0 : 100;
+    return { value, direction: '' };
+  }
+
+  // Для других режимов - точный расчет с определением направления
+  const difference = correctAnswer - userAnswer;
+  const absoluteDifference = Math.abs(difference);
+  let percentageDifference = (absoluteDifference / correctAnswer) * 100;
+  percentageDifference = Math.round(percentageDifference * 10) / 10;
+  
+  const direction = difference > 0 ? '-' : difference < 0 ? '+' : '';
+  return {
+    value: Math.min(percentageDifference, 100),
+    direction
+  };
+}
+
+
 export default function AnswerList({ data, styles, type }) {
   const listAnswers = data.map((element, index) => {
     // Деструктурируем общие поля
     const { num1, num2, arif, answer, expect, quest } = element;
-
-    // Парсим строку ответа и ожидаемое значение в числа
     const parsedAnswer = parseValue(answer);
     const parsedExpect = parseValue(expect);
 
     // Проверяем, совпадают ли
-    const isCorrect = parsedAnswer !== null && parsedAnswer === parsedExpect;
-    const percentError = isCorrect ? 0 : 100;
+    const { value: percentError, direction } = calculateErrorPercentage(parsedAnswer, parsedExpect, type);
+    const isCorrect = type === "Precise" 
+      ? percentError === 0 
+      : percentError <= 20;
+
     const backgroundColor = isCorrect ? "#bfdbc5" : "#dbc0c5";
 
     // Рендерим вопрос в зависимости от типа
@@ -59,7 +85,7 @@ export default function AnswerList({ data, styles, type }) {
           {questionContent}
           <Text>= {expect.toLocaleString()}</Text>
           <Text style={styles.text_bold}>{answerText}</Text>
-          <Text style={styles.text_bold}>Error is {percentError}%</Text>
+          <Text style={styles.text_bold}>Error is {direction}{percentError}%</Text>
         </View>
       </View>
     );

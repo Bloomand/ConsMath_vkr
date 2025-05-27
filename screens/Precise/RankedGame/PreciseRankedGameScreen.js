@@ -1,27 +1,37 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Text, View, ScrollView } from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 
+import AnswerList from "../../../components/AnswerList";
 import GamePrecise from "../../../components/GamePrecise/GamePrecise";
 import ResultTable from "../../../components/ResultTable";
-import AnswerList from "../../../components/AnswerList";
-
-import { useUserInfo } from "../../../hooks/useUserInfo";
+import { styles } from "../RankedGame/PreciseRankedGameScreen.styles";
 import { useSetUserInfo } from "../../../hooks/useSetUserInfo";
 import { useTotalRankInfo } from "../../../hooks/useTotalRankInfo";
-import { styles } from "../RankedGame/PreciseRankedGameScreen.styles";
+import { useUserInfo } from "../../../hooks/useUserInfo";
 
 const TYPE = "precise";
 const SUBTYPE = "ranked";
 
+const difficultyMap = {
+  0: 60,
+  1: 180,
+  2: 240,
+};
+
 const PreciseRankedGameScreen = ({ navigation, route }) => {
-  const [timerCount, setTimer] = useState();
+  const [timerCount, setTimer] = useState(
+    difficultyMap[route.params.difficulty] || 60
+  );
   const [component, setComponent] = useState();
-  const [time, setTime] = useState();
+  const [time, setTime] = useState(
+    difficultyMap[route.params.difficulty] || 60
+  );
   const [data, setData] = useState([]);
   const [shouldSave, setShouldSave] = useState();
   const [viewTimer, setViewTimer] = useState("0:00");
 
   const { userInfo, setUserInfo } = useUserInfo();
+  console.log(userInfo, "userInfo");
   const scoreData = useMemo(() => userInfo[TYPE][SUBTYPE], [userInfo]);
 
   useSetUserInfo({
@@ -39,6 +49,7 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
   useEffect(() => {
     const minutes = Math.floor(timerCount / 60);
     const seconds = String(timerCount % 60).padStart(2, "0");
+
     setViewTimer(`${minutes}:${seconds}`);
   }, [timerCount]);
 
@@ -50,12 +61,6 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
         </View>
       </View>
     );
-
-    const difficultyMap = {
-      0: 60,
-      1: 180,
-      2: 240,
-    };
 
     const selectedTime = difficultyMap[route.params.difficulty] || 60;
     setTimer(selectedTime);
@@ -70,8 +75,8 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
     return () => clearInterval(interval);
   }, []);
 
-
   useEffect(() => {
+    if (shouldSave) return;
     if (timerCount <= 0) {
       setShouldSave(1);
       return;
@@ -94,6 +99,7 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
   }, [timerCount, navigation]);
 
   useEffect(() => {
+    if (!shouldSave || timerCount > 0) return;
     setComponent(
       <View>
         <ResultTable
@@ -105,7 +111,9 @@ const PreciseRankedGameScreen = ({ navigation, route }) => {
           styles={styles}
           trainingType="Timed"
         />
-        <ScrollView><AnswerList data={data} styles={styles} type="Precise"/></ScrollView>
+        <ScrollView>
+          <AnswerList data={data} styles={styles} type="Precise" />
+        </ScrollView>
       </View>
     );
   }, [shouldSave, scoreData]);

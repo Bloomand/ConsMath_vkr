@@ -1,5 +1,6 @@
 export const validateEmail = (email) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email.includes('..')) return false;
   return re.test(String(email).toLowerCase());
 };
 
