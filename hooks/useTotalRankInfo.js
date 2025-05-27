@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+
 import { getUsers } from "../src/firebaseApi/userActions";
 
 export const useTotalRankInfo = (type, subType) => {
@@ -27,10 +28,10 @@ export const useTotalRankInfo = (type, subType) => {
   const mean = useMemo(() => {
     const sum = scores.reduce(
       (acc, item) => ({
-        total: acc.total + item.total,
-        right: acc.right + item.right,
-        wrong: acc.wrong + item.wrong,
-        seconds: acc.seconds + item.seconds,
+        total: acc.total + (item.total || 0),
+        right: acc.right + (item.right || 0),
+        wrong: acc.wrong + (item.wrong || 0),
+        seconds: acc.seconds + (item.seconds || 0),
       }),
       {
         total: 0,

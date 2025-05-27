@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from "react";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setUserGameData } from "../src/firebaseApi/userActions";
 
@@ -30,16 +31,18 @@ export const useSetUserInfo = ({
         total: data.length,
         right: rightAnswers,
         wrong: data.length - rightAnswers,
-        seconds: Math.floor(time / data.length),
+        seconds: data.length ? Math.floor(time / data.length) : 0,
       };
 
       const userId = await AsyncStorage.getItem("user-id");
       await setUserGameData(userId, newData, type, subType);
 
-      setUserInfo((prev) => ({
-        ...prev,
-        [type]: { ...prev[type], [subType]: newData },
-      }));
+      setUserInfo((prev) => {
+        return {
+          ...prev,
+          [type]: { ...prev[type], [subType]: newData },
+        };
+      });
     } catch (error) {
       console.log("Set user error", error);
     }
