@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Text, View, ScrollView } from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 
+import AnswerList from "../../../components/AnswerList";
 import GameEstimation from "../../../components/GameEstimation/GameEstimation.js";
 import ResultTable from "../../../components/ResultTable";
-import AnswerList from "../../../components/AnswerList";
-
-import { useUserInfo } from "../../../hooks/useUserInfo.js";
+import { styles } from "./EstimationRankedGameScreen.styles.js";
 import { useSetUserInfo } from "../../../hooks/useSetUserInfo.js";
 import { useTotalRankInfo } from "../../../hooks/useTotalRankInfo.js";
-import { styles } from "./EstimationRankedGameScreen.styles.js";
+import { useUserInfo } from "../../../hooks/useUserInfo.js";
 
 const TYPE = "estimation";
 const SUBTYPE = "ranked";
 
 const EstimationRankedGameScreen = ({ navigation, route }) => {
-  const [timerCount, setTimer] = useState();
+  const [timerCount, setTimer] = useState(
+    route.params.difficulty == 1 ? 180 : 240
+  );
   const [сomponent, setComponent] = useState();
-  const [time, setTime] = useState();
+  const [time, setTime] = useState(route.params.difficulty == 1 ? 180 : 240);
   const [data, setData] = useState([]);
   const [shouldSave, setShouldSave] = useState();
   const [viewTimer, setViewTimer] = useState("0:00");
@@ -99,6 +100,7 @@ const EstimationRankedGameScreen = ({ navigation, route }) => {
   }, [timerCount, navigation]);
 
   useEffect(() => {
+    if (!shouldSave || timerCount > 0) return;
     setComponent(
       <View>
         <ResultTable
@@ -110,7 +112,9 @@ const EstimationRankedGameScreen = ({ navigation, route }) => {
           styles={styles}
           trainingType="Timed"
         />
-        <ScrollView><AnswerList data={data} styles={styles} type="Estimation"/></ScrollView>
+        <ScrollView>
+          <AnswerList data={data} styles={styles} type="Estimation" />
+        </ScrollView>
       </View>
     );
   }, [shouldSave, scoreData]);
