@@ -11,6 +11,14 @@ function parseValue(val) {
   return null;
 }
 
+const formatNumber = (value) => {
+  if (value === "N/A" || value === null || value === undefined) return "N/A";
+  if (typeof value === "number") {
+    return value % 1 === 0 ? value.toString() : value.toFixed(1);
+  }
+  return value;
+};
+
 const ResultTable = ({
   data,
   scoreData,
@@ -35,7 +43,7 @@ const ResultTable = ({
   const secondsPerQuestion = isEndless
     ? "N/A"
     : totalAnswers > 0
-    ? Math.floor(time / totalAnswers)
+    ? time / totalAnswers
     : 0;
 
   // Данные для таблицы
@@ -57,10 +65,11 @@ const ResultTable = ({
     const top20 = twentyPercentMean[key];
 
     // Для endless-режима seconds = "N/A"
-    const displayValue = isEndless && key === "seconds" ? "N/A" : yourResultValue;
-    const displayBest = isEndless && key === "seconds" ? "N/A" : yourBestResult;
-    const displayAll = isEndless && key === "seconds" ? "N/A" : allUsers;
-    const displayTop20 = isEndless && key === "seconds" ? "N/A" : top20;
+    const displayValue = isEndless && key === "seconds" ? "N/A" : formatNumber(yourResultValue);
+    const displayBest = isEndless && key === "seconds" ? "N/A" : formatNumber(yourBestResult);
+    const displayAll = isEndless && key === "seconds" ? "N/A" : formatNumber(allUsers);
+    const displayTop20 = isEndless && key === "seconds" ? "N/A" : formatNumber(top20);
+
 
     return (
       <View style={styles.table_line} key={key}>
